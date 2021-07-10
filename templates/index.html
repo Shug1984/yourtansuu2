@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+
+{% block content %}
+<diV class="container">
+<h1>モデル</h1>
+<p>{{ message }}</p>
+<table border="1">
+    <tr>
+        <th>email</th>
+        <th>last_name</th>
+        <th>first_name</th>
+        <th>last_kana</th>
+        <th>first_kana</th>
+    </tr>
+    {% for member in data %}
+    <tr>
+    <td>{{ member.email }}</td>
+    <td>{{ member.last_name }}</td>
+    <td>{{ member.first_name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</diV>
+{% endblock content %}
+

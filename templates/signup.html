@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+<h1>ユーザー登録フォーム</h1>
+<form method="POST" novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">登録</button>
+</form>
+<p>{{ message }}</p>
+</div>
+
+
+
+
+{% endblock content %}
