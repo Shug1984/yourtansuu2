@@ -6,24 +6,11 @@
 
 {% block content %}
 <diV class="container">
-<h1>モデル</h1>
-<p>{{ message }}</p>
-<table border="1">
-    <tr>
-        <th>email</th>
-        <th>last_name</th>
-        <th>first_name</th>
-        <th>last_kana</th>
-        <th>first_kana</th>
-    </tr>
-    {% for member in data %}
-    <tr>
-    <td>{{ member.email }}</td>
-    <td>{{ member.last_name }}</td>
-    <td>{{ member.first_name }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<h1>Yourtansuu2はまだ工事中です</h1>
+
+<a href="{% url 'signup' %}"button class="w-100 btn btn-lg btn-primary" type="submit">新規登録</a></button>
+<a href="{% url 'login' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログインする</a></button>
+<a href="{% url 'logout' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログアウトする</a></button>
 </diV>
 {% endblock content %}
 

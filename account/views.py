@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import UserForm
 from .models import MyUser
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 
 def signup(request):
     params = {'message':'','form':None}
@@ -17,7 +18,7 @@ def signup(request):
 
     else:
         params['form'] = UserForm()
-    return render (request, 'index.html', params)
+    return render (request, 'signup.html', params)
 
 
 def loginview(request):
@@ -29,11 +30,16 @@ def loginview(request):
             login(request, user)
             return redirect('home')
         else:
-            return redirect('signup')
+            return redirect('login')
     
     return render(request,'login.html')
 
-@login_required
+
+def logoutview(request):
+    logout(request)
+    return render(request, 'logout.html')
+
+
 def homeview(request):
     return render(request, 'index.html')
 

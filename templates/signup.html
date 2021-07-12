@@ -10,7 +10,9 @@
   <form class="form-signin" method='post' novalidate>
     {% csrf_token %}
     {{ form.as_p }}
+    <p>生年月日<input type="date"> {{ form.date_of_birth }}</p> 
     <button class="w-100 btn btn-lg btn-primary" type="submit">登録する</button>
+    <a href="{% url 'home' %}" button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
 </form>
 <p>{{ message }}</p>
 </div>
