@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+  <h1 class="h3 mb-3 fw-normal">ユーザー情報を変更しました</h1>
+    <a href="{% url 'home' %}" button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
+<p>{{ message }}</p>
+</div>
+{% endblock content %}

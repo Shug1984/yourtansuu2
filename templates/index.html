@@ -3,14 +3,15 @@
 {% block header %}
 {% endblock header %}
 
-
 {% block content %}
-<diV class="container">
-<h1>Yourtansuu2はまだ工事中です</h1>
+<div class="container">
+<h1>Your Tansuu2はまだ準備中です</h1>
 
-<a href="{% url 'signup' %}"button class="w-100 btn btn-lg btn-primary" type="submit">新規登録</a></button>
-<a href="{% url 'login' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログインする</a></button>
-<a href="{% url 'logout' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログアウトする</a></button>
-</diV>
+
+<a href="{% url 'userupdate' user_id %}"button class="w-100 btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
+<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
+<a href="{% url 'original_logout' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログアウト</a></button>
+
+</div>
+
 {% endblock content %}
-
