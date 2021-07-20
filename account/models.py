@@ -42,7 +42,7 @@ class MyUser(AbstractBaseUser):
     region_name = models.CharField(max_length=100, choices=REGION_NAME_CHOICES)
     city_name= models.CharField(max_length=100)
     street_name= models.CharField(max_length=100)
-    building_name= models.CharField(max_length=300)
+    building_name= models.CharField(max_length=300, blank=True, null=True)
     tel = models.CharField(max_length=100)
     date_of_birth = models.DateTimeField(blank=True, null=True)
     gender = models.CharField(max_length=30, choices=GENDER_CHOICES)

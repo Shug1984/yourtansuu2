@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, resolve_url
-from .forms import UserForm, UserCreationForm, UserChangeForm
+from .forms import UserForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from .models import MyUser
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import DetailView, UpdateView, FormView
+from django.views.generic import DetailView, UpdateView, FormView, TemplateView
 from django.urls import reverse_lazy
 
 
@@ -50,27 +51,50 @@ def homeview(request):
 class UserChangeView(LoginRequiredMixin, FormView):
     template_name = 'user_registration/userupdate.html'
     form_class = UserChangeForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('userupdate_complete')
+
+    def get_initial(self):
+        pk = self.request.user.pk
+        #pk = self.kwargs['hogehoge']
+        user = MyUser.objects.get(pk=pk)
+        return {
+            'last_name':user.last_name, 'first_name':user.first_name, 'last_kana':user.last_kana, 'first_kana':user.first_kana,
+            'zip_code':user.zip_code, 'region_name':user.region_name, 'city_name':user.city_name, 'street_name':user.street_name,
+            'building_name':user.building_name, 'tel':user.tel, 'gender':user.gender,
+        }
     
     def form_valid(self, form):
-        #formのupdateメソッドにログインユーザーを渡して更新
-        form.update(user=self.request.user)
+        pk = self.request.user.pk
+        user = MyUser.objects.get(pk=pk)
+        user.last_name = form.cleaned_data['last_name']
+        user.first_name = form.cleaned_data['first_name']
+        user.last_kana = form.cleaned_data['last_kana']
+        user.first_kana = form.cleaned_data['first_kana']
+        user.zip_code = form.cleaned_data['zip_code']
+        user.region_name = form.cleaned_data['region_name']
+        user.city_name = form.cleaned_data['city_name']
+        user.street_name = form.cleaned_data['street_name']
+        user.building_name = form.cleaned_data['building_name']
+        user.tel = form.cleaned_data['tel']
+        user.gender = form.cleaned_data['gender']
+        
+        user.save()
         return super().form_valid(form)
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        # 更新前のユーザー情報をkwargsとして渡す
-        kwargs.update({
-            'email' : self.request.user.email,
-            'first_name' : self.request.user.first_name,
-            'last_name' : self.request.user.last_name,
-        })
-        return kwargs
+class PasswordChange(PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name = 'user_registration/change_password.html'
+    success_url = reverse_lazy('change_password_complete')
+   
 
+class PasswordChangeDone(PasswordChangeDoneView):
+    template_name = 'user_registration/change_password_complete.html'
 
 
 @login_required
 def indexview(request):
     return render(request, 'index.html')
+
+
 
 
