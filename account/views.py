@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, resolve_url
 from .forms import UserForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from .models import MyUser
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DetailView, UpdateView, FormView, TemplateView
@@ -90,6 +90,21 @@ class PasswordChange(PasswordChangeView):
 class PasswordChangeDone(PasswordChangeDoneView):
     template_name = 'user_registration/change_password_complete.html'
 
+class PasswordReset(PasswordResetView):
+    subject_template_name = 'registration/password_reset_subject.txt'
+    email_template_name = 'resgistration/password_reset_email.html'
+    template_name = 'user_registration/reset_password.html'
+    success_url = reverse_lazy('reset_password_complete')
+    
+class PasswordResetDone(PasswordResetDoneView):
+    template_name = 'user_registration/reset_password_complete.html'
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    success_url = reverse_lazy('reset_password_complete')
+    template_name = 'user_resgistration/reset_password_confirm.html'
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    tempalte_name = 'user_registration/reset_password_finish.html'
 
 @login_required
 def indexview(request):

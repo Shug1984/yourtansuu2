@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block header %}
+{% endblock header %}
+
+
+
+{% block content %}
+<div class="container">
+<form action='' method='POST' enctype="multipart/form-data">
+    <h1>アパレル登録機能工事中</h1>
+    {% csrf_token %}
+    {{ form.as_p}}
+</form>
+</div>
+{% endblock content %}
