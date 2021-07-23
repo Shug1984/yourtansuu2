@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block header %}
+{% endblock header %}
+
+
+
+{% block content %}
+<div class="container">
+{% csrf_token %}
+{% for item in object_list %}
+<h2>アイテムNo.:{{ item.data_id }}</h2>
+<h2>アイテムタイプ：{{ item.item_type }}</h2>
+<h2>季節：{{ item.season }}</h2>
+<h2>シーン：{{ item.occasion }}</h2>
+</div>
+<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
+{% endfor %}
+{% endblock content %}
