@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'contents/base.html' %}
 {% load django_bootstrap5 %}
 
 {% block header %}
@@ -7,14 +7,17 @@
 
 
 {% block content %}
+{{ block.super }}
 <div class="container">
-{% csrf_token %}
 {% for item in object_list %}
-<h2>アイテムNo.:{{ item.data_id }}</h2>
-<h2>アイテムタイプ：{{ item.item_type }}</h2>
-<h2>季節：{{ item.season }}</h2>
-<h2>シーン：{{ item.occasion }}</h2>
+<div class="card">
+   <h5 class="card-header">アイテム名称：{{ item.item_name }}</h5>
+   <h6 class="card-title">アイテム種類：{{ item.item_type }}</h6>
+   <h6 class="card-title">アイテム色：{{ item.item_color }}</h6>
+   <h6 class="card-title">作成日：{{ item.purchase_date }}</h6>
 </div>
-<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
+<a href="{% url 'closet_detail' item.pk %}"button class="btn btn-lg btn-primary" type="submit">詳細を見る</a></button>
 {% endfor %}
+</div>
+<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 {% endblock content %}

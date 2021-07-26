@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block header %}
+{% endblock header %}
+
+
+
+{% block content %}
+<div class="container">
+<h1>アパレル情報詳細</h1>
+{% for item in object_list %}
+<p>{{ item.item_type }}</p>
+<p>{{ item.season }}</p>
+<p>{{ item.occasion }}</p>
+<p>{{ item.item_name }}</p>
+<p>{{ item.item_color }}</p>
+<p>{{ item.item_brand }}</p>
+{% endfor %}
+<a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">リストに戻る</a></button>
+</div>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'contents/base.html' %}
+
+{% block content %}
+{{ block.super }}
+<h1>入力内容確認</h1>
+<table class="table">   
+    <tr>
+        <th>アイテム名称：</th>
+        <td>{{ form.item_name.value }}</td>
+    </tr>
+    <tr>
+        <th>アイテム色：</th>
+        <td>{{ form.item_color.value }}</td>
+    </tr>
+    <tr>
+        <th>アイテムブランド：</th>
+        <td>{{ form.item_brand.value }}</td>
+    </tr>
+</table>
+<form action = '.' method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    {{ field.as_hidden }}
+    {% endfor %}
+    <input type = 'hidden' name = 'action' value='input'>
+<button class="w-100 btn btn-lg btn-primary">入力に戻る</button>
+</form>
+<form action = '.' method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    {{ field.as_hidden }}
+    {% endfor %}
+    <input type = 'hidden' name = 'action' value='complete'>
+<button class="w-100 btn btn-lg btn-primary">登録する</button>
+</form>
+
+
+{% endblock content %}

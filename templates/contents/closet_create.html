@@ -8,14 +8,15 @@
 
 {% block content %}
 <div class="container">
+    {{ form.errors }}
 <form action='' method='POST' enctype="multipart/form-data">
     <h1>アパレル登録機能工事中</h1>
     {% csrf_token %}
     {{ form.as_p}}
-<input type = "hidden" name = 'user_id' value= "{{ user.id }}">
+    <input type = 'hidden' name = 'action' value = 'confirm'>
 <button class="w-100 btn btn-lg btn-primary" input type="submit">登録する</button>
-
 </form>
+
 
 </div>
 {% endblock content %}
