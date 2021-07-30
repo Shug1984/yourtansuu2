@@ -36,9 +36,27 @@ def closetlistview(request):
 
 @login_required
 def closetdetailview(request, pk):
-    object_list = Closet.objects.filter(user_id = request.user, pk=pk)
-    return render(request, 'contents/closet_detail.html',{'object_list':object_list})
+    object_item = Closet.objects.filter(user_id = request.user, pk=pk)
+    return render(request, 'contents/closet_detail.html',{'object_list':object_item})
+
+@login_required
+def closetdeleteview(request, pk):
+    object_item = Closet.objects.filter(user_id = request.user, pk=pk)
+    object_item.delete()
+    return render(request, 'contents/closet_delete.html',{'object_item':object_item})
+
+"""
+@login_required
+def closetupdateview(request, pk):
+    closet_item = Closet.objects.filter(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ClosetForm(request.POST, instance=closet_item)
+       if form.is_valid():
+           form.save()
+           return redirect('closet_detail', pk=pk)
+    else:
+        form = ClosetForm(instance=closet_item)
+    return render(request, 'contents/closet_update.html',{'form':form})
+"""
 
 
-
-# Create your views here.

@@ -18,5 +18,7 @@
 <p>{{ item.item_brand }}</p>
 {% endfor %}
 <a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">リストに戻る</a></button>
+<a href="{% url 'closet_delete' item.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">削除する</a></button>
+<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
 </div>
 {% endblock content %}

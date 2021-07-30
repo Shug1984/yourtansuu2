@@ -1,0 +1,19 @@
+{% extends 'contents/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block header %}
+{% endblock header %}
+
+
+
+{% block content %}
+{{ block.super }}
+<div class="container">
+    <form action ='' method='POST'>{% csrf_token %}
+        {{ form.as_p }}
+    </form>
+    <input type="submit" value='更新する'>
+</div>
+<a href="{% url 'closet_detail' item.pk %}"button class="btn btn-lg btn-primary" type="submit">詳細を見る</a></button>
+<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+{% endblock content %}
