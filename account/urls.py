@@ -3,6 +3,7 @@ from .views import signup, loginview, homeview, logoutview, indexview, UserChang
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
+
 urlpatterns = [
     path('user_registration/signup/',signup, name = 'signup'),
     path('user_registration/login/', loginview, name = 'original_login'),
@@ -17,5 +18,5 @@ urlpatterns = [
     path('user_registration/reset_password_finish/', PasswordResetComplete.as_view(template_name ='user_registration/reset_password_finish.html'), name = 'reset_password_finish'),
     path('home/', homeview, name = 'home'),   
     path('index/', indexview, name = 'index'),
-]
+] 
 

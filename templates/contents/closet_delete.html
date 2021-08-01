@@ -7,11 +7,15 @@
 
 
 {% block content %}
-<div>削除しました。</div>
+<div class="container">
+    <form action='' method="POST">
+        {% csrf_token %}
+    <button type = "submit" name = "button"  value = "confirm">削除します</button>
+    <button type = "submit" name = "button"  value = "abort">やっぱやめる</button>
+    </form>
+<a href="{% url 'index' %}" class="w-100 btn btn-lg btn-primary">ホームに戻る</a>
 
-<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
-
-
+</div>
 
 
 {% endblock content %}

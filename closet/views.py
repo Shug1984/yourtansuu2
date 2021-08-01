@@ -36,27 +36,38 @@ def closetlistview(request):
 
 @login_required
 def closetdetailview(request, pk):
-    object_item = Closet.objects.filter(user_id = request.user, pk=pk)
-    return render(request, 'contents/closet_detail.html',{'object_list':object_item})
+    #object_item = Closet.objects.filter(user_id = request.user, pk=pk)
+    object_item = Closet.objects.get(user_id = request.user, pk=pk)
+    return render(request, 'contents/closet_detail.html',{'object_item':object_item})
 
 @login_required
 def closetdeleteview(request, pk):
     object_item = Closet.objects.filter(user_id = request.user, pk=pk)
-    object_item.delete()
-    return render(request, 'contents/closet_delete.html',{'object_item':object_item})
+    if request.method == "POST":
+        if request.POST.get('button', '') == 'confirm':
+            return render(request, 'contents/closet_delete_confirm.html', {'object_item':object_item})
+        else:
+            object_item.delete()
+        return redirect('closet_delete_complete')
 
-"""
+    else:
+        return render(request, 'contents/closet_delete.html',{'object_item':object_item})
+
+@login_required
+def closetdeleteview_complete(request):
+    return render(request, 'contents/closet_delete_complete.html')   
+
 @login_required
 def closetupdateview(request, pk):
-    closet_item = Closet.objects.filter(user_id = request.user, pk=pk)
+    object_item = Closet.objects.get(user_id = request.user, pk=pk)
     if request.method == 'POST':
-       form = ClosetForm(request.POST, instance=closet_item)
+       form = ClosetForm(request.POST, instance=object_item)
        if form.is_valid():
            form.save()
            return redirect('closet_detail', pk=pk)
     else:
-        form = ClosetForm(instance=closet_item)
-    return render(request, 'contents/closet_update.html',{'form':form})
-"""
+        form = ClosetForm(instance = object_item)
+    return render(request, 'contents/closet_update.html',{'form':form, 'object_item':object_item})
+
 
 

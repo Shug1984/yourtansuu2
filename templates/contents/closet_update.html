@@ -14,6 +14,6 @@
     </form>
     <input type="submit" value='更新する'>
 </div>
-<a href="{% url 'closet_detail' item.pk %}"button class="btn btn-lg btn-primary" type="submit">詳細を見る</a></button>
+<a href="{% url 'closet_detail' object_item.pk %}"button class="btn btn-lg btn-primary" type="submit">詳細に戻る</a></button>
 <a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 {% endblock content %}

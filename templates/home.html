@@ -1,23 +1,44 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
+
 {% block header %}
+<div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <h2><a class="navbar-brand" href="#">YourTansuu2</a></h2>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                  <h5><a class="nav-link" href="{% url 'original_login' %}">ログインする</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="#">お問合わせ</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="#">Help</a></h5>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    </div>
 {% endblock header %}
 
 
 {% block content %}
-<diV class="container">
-<h1>Yourtansuu2はまだ工事中です</h1>
+{% load static %}
+<div class="container">
+<h1>Yourtansuu2へようこそ</h1>
+<h2>あなたは自分のクローゼットの中身ちゃんと把握できていますか？</h2>
 
-<a href="{% url 'signup' %}"button class="w-100 btn btn-lg btn-primary" type="submit">新規登録</a></button>
-<a href="{% url 'original_login' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログインする</a></button>
-<a href="{% url 'original_logout' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ログアウトする</a></button>
-<br\>
-<br\>
-<br\>
-<br\>
-<a href="{% url 'reset_password' %}"button class="w-100 btn btn-lg btn-primary" type="submit">パスワードを忘れちゃった！！</a></button>
+<a href="{% url 'signup' %}"button class="btn btn-lg btn-primary" type="submit">新規ユーザー登録</a></button>
+<a href="{% url 'original_login' %}"button class="btn btn-lg btn-primary" type="submit">ログインする</a></button>
+<small><a href="{% url 'reset_password' %}"button type= "button" class ="btn btn-secondary btn-sm" type="submit">パスワードを忘れちゃった！！</a></button></small>
+<img src = "{% static 'account-static/closet_image.png' %}" width="100%" height="70%" margin = "40px">
 </div>
-</diV>
 {% endblock content %}
 

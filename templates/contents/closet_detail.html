@@ -9,16 +9,16 @@
 {% block content %}
 <div class="container">
 <h1>アパレル情報詳細</h1>
-{% for item in object_list %}
-<p>{{ item.item_type }}</p>
-<p>{{ item.season }}</p>
-<p>{{ item.occasion }}</p>
-<p>{{ item.item_name }}</p>
-<p>{{ item.item_color }}</p>
-<p>{{ item.item_brand }}</p>
-{% endfor %}
+<p>{{ object_item.item_type }}</p>
+<p>{{ object_item.season }}</p>
+<p>{{ object_item.occasion }}</p>
+<p>{{ object_item.item_name }}</p>
+<p>{{ object_item.item_color }}</p>
+<p>{{ object_item.item_brand }}</p>
+
 <a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">リストに戻る</a></button>
-<a href="{% url 'closet_delete' item.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">削除する</a></button>
+<a href="{% url 'closet_delete' object_item.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">削除する</a></button>
+<a href="{% url 'closet_update' object_item.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">編集する</a></button>
 <a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
 </div>
 {% endblock content %}
