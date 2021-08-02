@@ -38,7 +38,7 @@ def loginview(request):
     
     return render(request,'user_registration/login.html',{'error_message':'ログインできません'})
 
-
+@login_required
 def logoutview(request):
     logout(request)
     return render(request, 'user_registration/logout.html')
@@ -46,6 +46,18 @@ def logoutview(request):
 
 def homeview(request):
     return render(request, 'home.html')
+
+
+@login_required
+def userinfoview(request, pk):
+    user_id = request.user.pk
+    user_information = MyUser.objects.get(pk = user_id)
+    context = {'user_information':user_information}
+    return render (request, 'user_registration/userinformation.html',context)
+
+@login_required
+def accountcontrolview(request):
+    return render (request, 'user_registration/accountcontrol.html')
 
 
 class UserChangeView(LoginRequiredMixin, FormView):
@@ -89,6 +101,7 @@ class PasswordChange(PasswordChangeView):
 
 class PasswordChangeDone(PasswordChangeDoneView):
     template_name = 'user_registration/change_password_complete.html'
+
 
 class PasswordReset(PasswordResetView):
     subject_template_name = 'registration/password_reset_subject.txt'
