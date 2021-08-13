@@ -2,18 +2,46 @@
 {% load django_bootstrap5 %}
 
 {% block header %}
+<div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <h2><a class="navbar-brand" href="#">YourTansuu2</a></h2>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                  <h5><a class="nav-link" href="{% url 'account_control' %}">アカウント情報</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="#">お問合わせ</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'original_logout' %}">ログアウト</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'index' %}">ホームに戻る</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'home' %}">トップに戻る</a></h5>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    </div>
 {% endblock header %}
-
 
 
 {% block content %}
 <div class="container">
     <form action='' method="POST">
         {% csrf_token %}
-        <h1>削除完了</h1>
-    <input type = "submit" value = '削除します'>
+        <h1>削除しました。</h1>
     </form>
-<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
+<a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">一覧に戻る</a></button>
+<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 
 </div>
 

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -8,7 +9,7 @@ from .forms import ClosetForm
 @login_required
 def ClosetCreate(request):
     if request.method == 'POST':
-        form = ClosetForm(request.POST)
+        form = ClosetForm(request.POST, request.FILES)
         if form.is_valid():
             action = request.POST['action']
             if action == 'input':
@@ -68,6 +69,15 @@ def closetupdateview(request, pk):
     else:
         form = ClosetForm(instance = object_item)
     return render(request, 'contents/closet_update.html',{'form':form, 'object_item':object_item})
+
+
+def closetlisting(request):
+    closet_list = Closet.objects.filter(user_id = request.user)
+    paginator = Paginator(closet_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/paginator.html', {'page_object': page_object})
 
 
 

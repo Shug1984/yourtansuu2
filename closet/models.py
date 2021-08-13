@@ -22,6 +22,7 @@ class Closet(models.Model):
     purchase_date = models.CharField(verbose_name = '購入日', max_length = 150)
     pricing = models.IntegerField(verbose_name = '購入価格(円)', )
     purchase_place = models.CharField(verbose_name = '購入場所', max_length=255)
+    item_image = models.ImageField(verbose_name = 'アイテム画像', upload_to='images/closet', blank = True, null=True)
     memo = models.TextField(verbose_name = 'メモ', blank=True)
     favorite_level = models.IntegerField(verbose_name = 'お気に入り度', choices = FAVORITE_LEVEL_CHOICES)
     item_importance = models.IntegerField(verbose_name = '大事さ', choices = ITEM_IMPORTANCE_CHOICES)

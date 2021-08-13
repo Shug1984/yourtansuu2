@@ -34,6 +34,7 @@
 <div class="container">
 <h1>Your Tansuu2</h1>
 <h2>今日は何をしますか？？</h2>
+<h3>ログイン中のユーザーは<a href="{% url 'user_information' request.user.pk %}">{{ request.user }}</a>です</h3>
 
 
 <a href="{% url 'closet_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレルを登録する</a></button>

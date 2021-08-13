@@ -1,22 +1,95 @@
 {% extends 'contents/base.html' %}
 
+{% block header %}
+<div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <h2><a class="navbar-brand" href="#">YourTansuu2</a></h2>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                  <h5><a class="nav-link" href="{% url 'account_control' %}">アカウント情報</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="#">お問合わせ</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'original_logout' %}">ログアウト</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'index' %}">ホームに戻る</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'home' %}">トップに戻る</a></h5>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    </div>
+{% endblock header%}
+
 {% block content %}
 {{ block.super }}
+<div class = "container">
 <h1>入力内容確認</h1>
-<table class="table">   
+<table class="table">
+    <tr>
+        <th>アイテム種類：</th>
+        <td>{{ form.instance.get_item_type_display }}</td>
+    </tr>
+    <tr>
+        <th>季節：</th>
+        <td>{{ form.instance.get_season_display }}</td>
+    </tr>
+    <tr>
+        <th>シーン：</th>
+        <td>{{ form.instance.get_occasion_display }}</td>
+    </tr>
     <tr>
         <th>アイテム名称：</th>
         <td>{{ form.item_name.value }}</td>
     </tr>
     <tr>
         <th>アイテム色：</th>
-        <td>{{ form.item_color.value }}</td>
+        <td>{{ form.instance.get_item_color_display }}</td>
     </tr>
     <tr>
         <th>アイテムブランド：</th>
         <td>{{ form.item_brand.value }}</td>
     </tr>
+    <tr>
+        <th>購入日：</th>
+        <td>{{ form.purchase_date.value }}</td>
+    </tr>
+    <tr>
+        <th>購入価格：</th>
+        <td>{{ form.pricing.value }}円</td>
+    </tr>
+    <tr>
+        <th>メモ：</th>
+        <td>{{ form.memo.value }}</td>
+    </tr>
+    <tr>
+        <th>お気に入り度：</th>
+        <td>{{ form.instance.get_favorite_level_display }}</td>
+    </tr>
+    <tr>
+        <th>大事さ：</th>
+        <td>{{ form.instance.get_item_importance_display }}</td>
+    </tr>
 </table>
+<form action = '.' method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    {{ field.as_hidden }}
+    {% endfor %}
+    <input type = 'hidden' name = 'action' value='complete'>
+<button class="btn btn-lg btn-primary">登録する</button>
+</form>
 <form action = '.' method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -25,14 +98,8 @@
     <input type = 'hidden' name = 'action' value='input'>
 <button class="w-100 btn btn-lg btn-primary">入力に戻る</button>
 </form>
-<form action = '.' method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    {{ field.as_hidden }}
-    {% endfor %}
-    <input type = 'hidden' name = 'action' value='complete'>
-<button class="w-100 btn btn-lg btn-primary">登録する</button>
-</form>
+
+</div>
 
 
 {% endblock content %}

@@ -21,8 +21,12 @@
             <h5><a class="nav-link" href="{% url 'original_logout' %}">ログアウト</a></h5>
           </li>
           <li class="nav-item">
-            <h5><a class="nav-link" href="{% url 'home' %}">トップに戻る</a></h5>
+            <h5><a class="nav-link" href="{% url 'index' %}">ホームに戻る</a></h5>
           </li>
+        </li>
+        <li class="nav-item">
+          <h5><a class="nav-link" href="{% url 'home' %}">トップに戻る</a></h5>
+        </li>
         </ul>
       </div>
     </div>
@@ -35,9 +39,9 @@
 <h1>アカウント情報の管理ページです</h1>
 <h2>今日は何をしますか？？</h2>
 
-<a href="{% url 'user_information' request.user.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">ユーザー情報</a></button>
-<a href="{% url 'userupdate' request.user.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
-<a href="{% url 'change_password' request.user.pk %}"button class="w-100 btn btn-lg btn-primary" type="submit">パスワード変更</a></button>
+<a href="{% url 'user_information' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報</a></button>
+<a href="{% url 'userupdate' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
+<a href="{% url 'change_password' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">パスワード変更</a></button>
 <p class="mt-5 mb-3 text-muted">&copy; 2017–2021, Sugasawa</p>
 </div>
 
