@@ -23,7 +23,7 @@
     <tbody>
       {% for item in page_object %}
       <tr>
-        <th>{{ forloop.counter }}</th>
+        <th>{{ forloop.counter0 | add:page_object.start_index }}</th>
         <th>{{ item.item_name|upper }}</th>
         <th>{{ item.get_item_type_display|upper }}</th>
         <th>{{ item.get_item_color_display|upper }}</th>
