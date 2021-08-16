@@ -34,16 +34,13 @@
 {% endblock header %}
 
 
+
 {% block content %}
 <div class="container">
-    <form action='' method="POST">
-        {% csrf_token %}
-        <h1>削除しました。</h1>
-    </form>
-<a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">一覧に戻る</a></button>
-<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
-
+<h1>アイテム登録成功(仮画面)</h1>
+<h5>リストに登録しました！</h5>
+<a href="{% url 'item_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">一覧で確認する</a>
+<a href="{% url 'item_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">続けて次のアイテムを登録する</a></button>
+<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
 </div>
-
-
 {% endblock content %}

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Closet
+from .models import Item
 
-admin.site.register(Closet)
+admin.site.register(Item)
 
 
 

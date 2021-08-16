@@ -28,7 +28,7 @@
         <th>{{ item.get_item_type_display|upper }}</th>
         <th>{{ item.get_item_color_display|upper }}</th>
         <th>{{ item.purchase_date|upper }}</th>
-        <th><a href="{% url 'closet_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
+        <th><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
       </tr>
       {% endfor %}
     </tbody>

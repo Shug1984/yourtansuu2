@@ -36,10 +36,14 @@
 
 
 {% block content %}
+{{ block.super }}
 <div class="container">
-<h1>アイテム登録成功(仮画面)</h1>
-<h5>リストに登録しました！</h5>
-<a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">一覧で確認する</a>
-<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
+    <form action ='' method='POST'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="更新する" %}
+    </form>
+<a href="{% url 'item_detail' object_item.pk %}"button class="btn btn-sm btn-primary" type="submit">前のページに戻る</a></button>
+<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 </div>
 {% endblock content %}

@@ -10,8 +10,8 @@ FAVORITE_LEVEL_CHOICES = [(1,'めちゃ低い'),(2,'低い'),(3,'普通'),(4,'�
 ITEM_IMPORTANCE_CHOICES = [(1,'捨てれる'),(2,'悩む'),(3,'普通'),(4,'まあ大事'),(5,'めっちゃ大事')]
 
 
-class Closet(models.Model):
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE,null=True)
+class Item(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE,null=True)
     data_id = models.AutoField(verbose_name = 'アイテムNo.', primary_key=True)
     item_type = models.CharField(verbose_name = 'アイテム種類', max_length=255, choices = ITEM_TYPE_CHOICES)
     season = models.CharField(verbose_name = '季節', max_length=10, choices = SEASON_CHOICES)

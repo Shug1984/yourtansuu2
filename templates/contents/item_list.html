@@ -55,11 +55,11 @@
       {% for item in object_list %}
       <tr>
         <th>{{ forloop.counter }}</th>
-        <th><a href="{% url 'closet_detail' item.pk %}"　type="submit">{{ item.item_name }}</a></th>
+        <th><a href="{% url 'item_detail' item.pk %}"　type="submit">{{ item.item_name }}</a></th>
         <th>{{ item.get_item_type_display }}</th>
         <th>{{ item.get_item_color_display }}</th>
         <th>{{ item.purchase_date }}</th>
-        <th><a href="{% url 'closet_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
+        <th><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
       </tr>
       {% endfor %}
     </tbody>
@@ -68,4 +68,5 @@
     {% endif %}
 </table>
 <a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+
 {% endblock content %}
