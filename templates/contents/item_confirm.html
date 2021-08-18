@@ -71,7 +71,10 @@
     </tr>
     <tr>
         <th>アイテム画像：</th>
-        <td>{{ form.item_image.value }}</td>
+        <td>
+            <img src="{{ item_image_base64 }}" style="max-width: 300px;" /> <br />
+            {{ form.item_image.value }}
+        </td>
     </tr>
     <tr>
         <th>メモ：</th>
@@ -92,6 +95,7 @@
     {{ field.as_hidden }}
     {% endfor %}
     <input type = 'hidden' name = 'action' value='complete'>
+    <input type="hidden" name="item_image_base64" value="{{ item_image_base64 }}" />
 <button class="btn btn-lg btn-primary">登録する</button>
 </form>
 <form action = '.' method="post">
