@@ -1,45 +1,43 @@
-{% extends 'contents/base.html' %}
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
 {% block header %}
 <div class = "container">
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <div class="container-fluid">
-         <h2><a class="navbar-brand" href="#">YourTansuu2</a></h2>
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarNav">
-           <ul class="navbar-nav">
-             <li class="nav-item">
-                 <h5><a class="nav-link" href="{% url 'account_control' %}">アカウント情報</a></h5>
-             </li>
-             <li class="nav-item">
-               <h5><a class="nav-link" href="#">お問合わせ</a></h5>
-             </li>
-             <li class="nav-item">
-               <h5><a class="nav-link" href="{% url 'original_logout' %}">ログアウト</a></h5>
-             </li>
-             <li class="nav-item">
-               <h5><a class="nav-link" href="{% url 'index' %}">ホームに戻る</a></h5>
-             </li>
-             <li class="nav-item">
-               <h5><a class="nav-link" href="{% url 'home' %}">トップに戻る</a></h5>
-             </li>
-           </ul>
-         </div>
-       </div>
-   </nav>
-   </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <h2><a class="navbar-brand" href="#">YourTansuu2</a></h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <h5><a class="nav-link" href="{% url 'account_control' %}">アカウント情報</a></h5>
+            </li>
+            <li class="nav-item">
+              <h5><a class="nav-link" href="#">お問合わせ</a></h5>
+            </li>
+            <li class="nav-item">
+              <h5><a class="nav-link" href="{% url 'original_logout' %}">ログアウト</a></h5>
+            </li>
+            <li class="nav-item">
+              <h5><a class="nav-link" href="{% url 'index' %}">ホームに戻る</a></h5>
+            </li>
+            <li class="nav-item">
+              <h5><a class="nav-link" href="{% url 'home' %}">トップに戻る</a></h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+  </div>
 {% endblock header %}
 
 
-
 {% block content %}
-{{ block.super }}
 <div class="container">
-  <p>登録アイテム数：{{ object_list | length }}件</p>
-  {% if object_list %}
+  <p>登録アイテム数：{{ page_object | length }}件</p>
+  {% if page_object %}
   <table class="table">
     <thead>
       <tr>
@@ -52,13 +50,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for item in object_list %}
+      {% for item in page_object %}
       <tr>
-        <th>{{ forloop.counter }}</th>
-        <th><a href="{% url 'item_detail' item.pk %}"　type="submit">{{ item.item_name }}</a></th>
-        <th>{{ item.get_item_type_display }}</th>
-        <th>{{ item.get_item_color_display }}</th>
-        <th>{{ item.purchase_date }}</th>
+        <th>{{ forloop.counter0 | add:page_object.start_index }}</th>
+        <th>{{ item.item_name|upper }}</th>
+        <th>{{ item.get_item_type_display|upper }}</th>
+        <th>{{ item.get_item_color_display|upper }}</th>
+        <th>{{ item.purchase_date|upper }}</th>
         <th><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
       </tr>
       {% endfor %}
@@ -66,7 +64,27 @@
     {% else %}
     <p>まだアイテムが登録されていません</p>
     {% endif %}
-</table>
-<a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 
+<div class="pagination">
+    <span class="step-links">
+        {% if page_object.has_previous %}
+            <a href="?page=1">&laquo; 1ページ目に戻る</a>
+            <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
+        {% endif %}
+
+        <span class="current">
+            ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}.
+        </span>
+
+        {% if page_object.has_next %}
+            <a href="?page={{ page_object.next_page_number }}">次のページ</a>
+            <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock content %}
+
+{% for item in page_object %}
+    {{ item.item_name|upper}}<br>
+    {{ item.item_type|upper}}<br>
+{% endfor %}

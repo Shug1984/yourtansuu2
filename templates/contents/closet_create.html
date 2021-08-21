@@ -34,31 +34,15 @@
 {% endblock header %}
 
 
-
 {% block content %}
 <div class="container">
-<h1>アパレル情報詳細</h1>
-<ul>
-<li>アイテム種類：{{ object_item.get_item_type_display }}</li>
-<li>季節：{{ object_item.get_season_display }}</li>
-<li class="table-light">シーン：{{ object_item.get_occasion_display }}</li>
-<li class="table-light">アイテム名称：{{ object_item.item_name }}</li>
-<li class="table-light">アイテムカラー：{{ object_item.get_item_color_display }}</li>
-<li class="table-light">ブランド：{{ object_item.item_brand }}</li>
-<li class="table-light">購入日：{{ object_item.purchase_date }}</li>
-<li class="table-light">購入価格：{{ object_item.pricing }}円</li>
-<li class="table-light">購入場所：{{ object_item.purchase_place }}</li>
-<li class="">メモ：{{ object_item.memo }}</li>
-<li class="table-light">お気に入り度：{{ object_item.get_favorite_level_display }}</li>
-<li class="table-light">大事さ：{{ object_item.get_favorite_level_display }}</li>
-<li class="table-light">クローゼット：{{ object_item.instance.get_closet_display }}</li>
-</ul>
-<a href="{% url 'item_list' %}"button class="btn btn-lg btn-primary" type="submit">リストに戻る</a></button>
-<a href="{% url 'item_delete' object_item.pk %}"button class="btn btn-lg btn-primary" type="submit">削除する</a></button>
-<a href="{% url 'item_update' object_item.pk %}"button class="btn btn-lg btn-primary" type="submit">編集する</a></button>
+{{ form.errors }}
+<form action='' method='POST' enctype="multipart/form-data">
+    <h2>クローゼット作成機能</h2>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type="submit" content="クローゼット作成" %}
+</form>
 <a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 </div>
 {% endblock content %}
-
-<li class="table-light">アイテム画像：<img src ='{{ object_item.item_image.url }}' width=100></li>
-

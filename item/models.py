@@ -1,6 +1,18 @@
 from django.db import models
 from django.conf import settings
 
+class Closet(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE,null=True)
+    closet_name = models.CharField(verbose_name='クローゼット名', max_length=255)
+    closet_memo = models.CharField(verbose_name='メモ', max_length=325)
+    create_date = models.DateTimeField(verbose_name='作成日', auto_now_add=True)
+
+    class Meta:
+        ordering = ['closet_name']
+
+    def __str__(self):
+        return self.closet_name
+
 
 ITEM_TYPE_CHOICES = [('jacket','上着'),('shirt','シャツ'),('pants','パンツ'),('underpants','下着(下)'),('undershirt','下着(上)'),('socks','靴下'),('others','その他')]
 SEASON_CHOICES = [('spring','春'),('summer','夏'),('fall','秋'),('winter','冬')]
@@ -8,7 +20,6 @@ OCCASION_CHOICES = [('daily_use','普段着'),('work_wear','仕事'),('active_we
 ITEM_COLOR_CHOICES = [('red','赤'),('blue','青'),('green','緑'),('yellow','黄'),('purple','紫'),('orange','橙'),('black','黒'),('white','白'),('grey','灰'),('beige','ベージュ'),('navy','ネイビー'),('brown','茶'),('others','その他')]
 FAVORITE_LEVEL_CHOICES = [(1,'めちゃ低い'),(2,'低い'),(3,'普通'),(4,'高い'),(5,'めちゃ高い')]
 ITEM_IMPORTANCE_CHOICES = [(1,'捨てれる'),(2,'悩む'),(3,'普通'),(4,'まあ大事'),(5,'めっちゃ大事')]
-
 
 class Item(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ユーザー', on_delete=models.CASCADE,null=True)
@@ -28,6 +39,20 @@ class Item(models.Model):
     item_importance = models.IntegerField(verbose_name = '大事さ', choices = ITEM_IMPORTANCE_CHOICES)
     create_date = models.DateTimeField(verbose_name = '作成日', auto_now_add=True)
     update_date = models.DateTimeField(verbose_name = '更新日', auto_now=True)
+    closet = models.ManyToManyField(Closet)
+    
 
     def __str__(self):
         return self.item_name
+
+
+
+
+
+
+
+
+
+
+
+

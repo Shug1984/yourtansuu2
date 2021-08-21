@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from .models import Item
-from .forms import ItemForm
+from .models import Item, Closet
+from .forms import ItemForm, ClosetForm
 
 @login_required
 def ItemCreate(request):
@@ -32,8 +32,12 @@ def Itemcompleteview(request):
     
 @login_required
 def Itemlistview(request):
-    object_list = Item.objects.filter(user_id = request.user)
-    return render(request, 'contents/item_list.html',{'object_list':object_list})
+    item_list = Item.objects.filter(user_id = request.user)
+    paginator = Paginator(item_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/item_list.html', {'page_object': page_object})
 
 @login_required
 def Itemdetailview(request, pk):
@@ -70,6 +74,36 @@ def Itemupdateview(request, pk):
         form = ItemForm(instance = object_item)
     return render(request, 'contents/item_update.html',{'form':form, 'object_item':object_item})
 
+def ClosetCreateView(request):
+    if request.method == 'POST':
+        form = ClosetForm(request.POST)
+        if form.is_valid():
+            closet = form.save(commit=False)
+            closet.user = request.user
+            closet.save()
+            return redirect('closet_create_complete')
+    else:
+        form = ClosetForm()
+    return render(request,'contents/closet_create.html', {'form':form})
+
+def ClosetCreateCompleteView(request):
+    return render(request, 'contents/closet_create_complete.html')
+
+
+def ClosetListView(request):
+    object_list = Closet.objects.filter(user_id = request.user)
+    return render(request, 'contents/closet_list.html', {'object_list':object_list})
+
+"""
+def ClosetDetailView(request):
+    object_list = Item.objects.filter(user_id=request.user,closet)
+    return render(request, 'contents/closet_filter.html',{'object_list':object_list})
+"""
+
+"""
+def Itemlistview(request):
+    object_list = Item.objects.filter(user_id = request.user)
+    return render(request, 'contents/item_list.html',{'object_list':object_list})
 
 def Itemlisting(request):
     item_list = Item.objects.filter(user_id = request.user)
@@ -79,5 +113,4 @@ def Itemlisting(request):
     page_object = paginator.get_page(page_number)
     return render(request, 'contents/paginator.html', {'page_object': page_object})
 
-
-
+"""

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ItemCreate, Itemlistview, Itemcompleteview, Itemdetailview, Itemdeleteview, Itemdeleteview_complete, Itemupdateview, Itemlisting
+from .views import ItemCreate, Itemlistview, Itemcompleteview, Itemdetailview, Itemdeleteview, Itemdeleteview_complete, Itemupdateview, ClosetCreateView, ClosetCreateCompleteView, ClosetListView
 
 urlpatterns = [
     path('contents/item-create/', ItemCreate, name = 'item_create'),
@@ -10,5 +10,11 @@ urlpatterns = [
     path('contents/item-delete-confirm/<int:pk>/', Itemdeleteview, name = 'item_delete_confirm'),
     path('contents/item-delete_complete/', Itemdeleteview_complete, name = 'item_delete_complete'),
     path('contents/item-update/<int:pk>/', Itemupdateview, name = 'item_update'),
-    path('contents/paginator-list/', Itemlisting, name = 'paginator'),
+    path('contents/closet-create/', ClosetCreateView, name = 'closet_create'),
+    path('contents/closet-create-complete/', ClosetCreateCompleteView, name = 'closet_create_complete'),
+    path('contents/closet_list/',ClosetListView, name = 'closet_list'),
     ] 
+
+"""
+ path('contents/paginator-list/', Itemlisting, name = 'paginator'),
+ """
