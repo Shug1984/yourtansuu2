@@ -45,7 +45,25 @@
     {% bootstrap_form form %}
     <input type = 'hidden' name = 'action' value = 'confirm'>
     {% bootstrap_button button_type="submit" content="新規登録" %}
+    <input type="hidden" id="id_item_image_base64" name="item_image_base64" />
 </form>
 <a href="{% url 'index' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 </div>
+
+<script>
+  function upload_img() {
+    const file = this.files[0];
+    const reader = new FileReader();
+    const item_image_base64 = document.getElementById('id_item_image_base64');
+
+    reader.addEventListener("load", function () {
+      item_image_base64.value = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+  document.getElementById('id_item_image').addEventListener("change", upload_img);
+</script>
 {% endblock content %}
