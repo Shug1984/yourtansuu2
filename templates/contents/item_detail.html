@@ -52,7 +52,7 @@
 <li class="">メモ：{{ object_item.memo }}</li>
 <li class="table-light">お気に入り度：{{ object_item.get_favorite_level_display }}</li>
 <li class="table-light">大事さ：{{ object_item.get_favorite_level_display }}</li>
-<li class="table-light">クローゼット：{{ object_item.instance.get_closet_display }}</li>
+<li class="table-light">クローゼット：{{ object_item.closet }}</li>
 </ul>
 <a href="{% url 'item_list' %}"button class="btn btn-lg btn-primary" type="submit">リストに戻る</a></button>
 <a href="{% url 'item_delete' object_item.pk %}"button class="btn btn-lg btn-primary" type="submit">削除する</a></button>

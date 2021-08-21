@@ -60,7 +60,13 @@ def Itemcompleteview(request):
     
 @login_required
 def Itemlistview(request):
+    #print(request.GET['closet'])
     item_list = Item.objects.filter(user_id = request.user)
+    if request.GET.get('closet'):
+        closet = request.GET['closet']
+        item_list = item_list.filter(closet=closet)
+
+    """import pdb;pdb.set_trace()"""
     paginator = Paginator(item_list, 10)
 
     page_number = request.GET.get('page')

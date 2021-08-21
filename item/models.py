@@ -39,7 +39,7 @@ class Item(models.Model):
     item_importance = models.IntegerField(verbose_name = '大事さ', choices = ITEM_IMPORTANCE_CHOICES)
     create_date = models.DateTimeField(verbose_name = '作成日', auto_now_add=True)
     update_date = models.DateTimeField(verbose_name = '更新日', auto_now=True)
-    closet = models.ManyToManyField(Closet)
+    closet = models.ForeignKey(Closet, on_delete=models.PROTECT, null=True, default=None)
     
 
     def __str__(self):
