@@ -1,47 +1,55 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-
 {% block header %}
-<div class = "container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <h2><a class="navbar-brand" href="#">YourTansuu2</a></h2>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                  <h5><a class="nav-link" href="{% url 'original_login' %}">ログインする</a></h5>
-              </li>
-              <li class="nav-item">
-                <h5><a class="nav-link" href="#">お問合わせ</a></h5>
-              </li>
-              <li class="nav-item">
-                <h5><a class="nav-link" href="#">Help</a></h5>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-    </div>
 {% endblock header %}
 
-
 {% block content %}
-{% load static %}
-<div class="container">
-<h1>Yourtansuu2へようこそ</h1>
-<h2>あなたは自分のクローゼットの中身ちゃんと把握できていますか？</h2>
+<header>
+    <div class = "container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <p><a class="navbar-brand" href="#">YourTansuu2</a></p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                    <p><a class="nav-link" href="{% url 'user_control' %}">アカウント情報</a></p>
+                </li>
+                <li class="nav-item">
+                  <p><a class="nav-link" href="#">お問合わせ</a></p>
+                </li>
+                <li class="nav-item">
+                  <p><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></p>
+                </li>
+                <li class="nav-item">
+                  <p><a class="nav-link" href="{% url 'home' %}">ホームに戻る</a></p>
+                </li>
+                <li class="nav-item">
+                  <p><a class="nav-link" href="{% url 'top' %}">トップに戻る</a></p>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+    </div>
+  </header>
+<body>
+    <div class="container">
+        <h3>Your Tansuu2</h3>
+        <p>今日は何をしますか？？</p>
+        <p>ログイン中のユーザーは<a href="{% url 'user_information' request.user.pk %}">{{ request.user }}</a>です</p>
+        
+        <a href="{% url 'closet_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">クローゼットを作る</a>
+        <a href="{% url 'item_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレルを登録する</a>
+        <a href="{% url 'item_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレル一覧を見る</a>
+        <a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">クローゼット一覧を見る</a>
+    </div>
+    <div class="container">
+      <a href="{% url 'testview' %}"button class="w-100 btn btn-lg btn-primary" type="submit">新・ホームページ</a>
+    </div>
+</body>
 
-<a href="{% url 'signup' %}"button class="btn btn-lg btn-primary" type="submit">新規ユーザー登録</a></button>
-<a href="{% url 'original_login' %}"button class="btn btn-lg btn-primary" type="submit">ログインする</a></button>
-<small><a href="{% url 'reset_password' %}"button type= "button" class ="btn btn-secondary btn-sm" type="submit">パスワードを忘れちゃった！！</a></button></small>
-<img src = "{% static 'account-static/closet_image.png' %}" width="100%" height="70%" margin = "40px">
-</div>
-<div class = "container">
-<p class="mt-5 mb-3 text-muted">&copy; 2017–2021, Sugasawa</p>
-</div>
 {% endblock content %}
-

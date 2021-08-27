@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+
+
+
+{% block header %}
+{% load static %}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+  <h1 class="title">Yourtansuu2へようこそ</h1>
+  <p class="subtitle">あなたは自分のクローゼットの中身ちゃんと把握できていますか？</p>
+  <a href="{% url 'signup' %}"button class="btn btn-lg btn-primary" type="submit">新規ユーザー登録</a></button>
+  <a href="{% url 'login' %}"button class="btn btn-lg btn-primary" type="submit">ログインする</a></button>
+  <small><a href="{% url 'reset_password' %}"button type= "button" class ="btn btn-secondary btn-sm" type="submit">パスワードを忘れちゃった！！</a></button></small>
+  <img src = "{% static 'account-static/closet_image.png' %}" width="100%" height="50%" margin = "40px">
+</div>
+{% endblock content %}
+
+
+

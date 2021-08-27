@@ -1,0 +1,38 @@
+{% extends 'account/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block header %}{% endblock header %}
+
+{% block content %}
+<div class="container">
+  <h1 class="h3 mb-3 fw-normal">ユーザー情報です</h1>
+  <form action="", method = "get">
+  <ul>
+  <p>名前：{{ user_information.last_name }}　{{ user_information.first_name }}</p>
+  <p>フリガナ：{{ user_information.last_kana }}　{{ user_information.first_kana }}</p>
+  <p>登録メールアドレス：{{ request.user }}(ユーザーID)</p>
+  </ul>
+
+  <table class="table">
+    <thead>
+      <th>郵便番号：</th>
+      <th>住所：</th>
+      <th>電話番号：</th>
+      <th>性別：</th>
+    </thead>
+    <tbody>
+      <th>{{ user_information.zip_code }}</th>
+      <th>{{ user_information.get_region_name_display }} {{ user_information.city_name }}  {{ user_information.street_name }} {{ user_information.building_name }}</th>
+      <th>{{ user_information.tel }}</th>
+      <th>{{ user_information.get_gender_display }}</th>
+    </tbody>
+</table>
+  </ul>
+  </form>
+  <a href="{% url 'user_update' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
+  <a href="{% url 'user_control' %}"button class="btn btn-lg btn-primary" type="submit">アカウント情報へ戻る</a></button>
+  <a href="{% url 'home' %}" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+<p>{{ message }}</p>
+</div>
+{% endblock content %}
+

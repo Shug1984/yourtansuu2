@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
+{% block extraheader %}
+{% endblock extraheader %}
+
 {% block navbar %}
 <header>
   <div class = "container">
@@ -34,5 +37,3 @@
   </div>
 </header>
 {% endblock navbar%}
-
-{% block added_tag %}{% endblock added_tag%}
