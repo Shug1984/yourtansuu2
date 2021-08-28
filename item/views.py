@@ -1,3 +1,6 @@
+import base64
+import mimetypes
+from django.core.files.base import ContentFile
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
@@ -7,10 +10,12 @@ from .models import Item, Closet
 from .forms import ItemForm, ClosetForm
 
 
-def decode_base64_file(file_name, data):
-    from django.core.files.base import ContentFile
-    import base64
+def encode_base64_file(image):
+    encode_file = base64.b64encode(image.read()).decode()
+    mimetype = mimetypes.guess_type(image.name)[0]
+    return f'data:{mimetype};base64,{encode_file}'
 
+def decode_base64_file(file_name, data):
     if 'data:' in data and ';base64,' in data:
         header, data = data.split(';base64,')
 
@@ -32,12 +37,13 @@ def ItemCreate(request):
             if action == 'input':
                 return render(request, 'contents/item_create.html', {'form':form})
             elif action == 'confirm':
+                item_image_base64 = encode_base64_file(request.FILES['item_image'])
                 return render(
                     request,
                     'contents/item_confirm.html',
                     {
                         'form':form,
-                        'item_image_base64': request.POST.get('item_image_base64'),
+                        'item_image_base64': item_image_base64,
                     }
                 )
             else:
