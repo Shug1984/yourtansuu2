@@ -1,55 +1,149 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load django_bootstrap5 %}
+
 
 {% block header %}
 {% endblock header %}
 
 {% block content %}
 <header>
-    <div class = "container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <p><a class="navbar-brand" href="#">YourTansuu2</a></p>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                    <p><a class="nav-link" href="{% url 'user_control' %}">アカウント情報</a></p>
-                </li>
-                <li class="nav-item">
-                  <p><a class="nav-link" href="#">お問合わせ</a></p>
-                </li>
-                <li class="nav-item">
-                  <p><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></p>
-                </li>
-                <li class="nav-item">
-                  <p><a class="nav-link" href="{% url 'home' %}">ホームに戻る</a></p>
-                </li>
-                <li class="nav-item">
-                  <p><a class="nav-link" href="{% url 'top' %}">トップに戻る</a></p>
-                </li>
-              </ul>
+  <div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid" style="margin:0 auto;">
+          <p><a class="navbar-brand" href="#">YourTansuu2</a></p>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'user_control' %}">アカウント情報</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="#">お問合わせ</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'home' %}">ホームに戻る</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'top' %}">トップに戻る</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+  </div>
+</header>
+<body>
+  <div class="container py-3">
+    <header>
+      <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">YourTansuu2へようこそ</h1>
+        <p class="fs-5 text-muted">あなたは自分のクローゼットの中身、把握していますか？</p>
+        <p>ログイン中のユーザーは<a href="{% url 'user_information' request.user.pk %}">{{ request.user }}</a>です</p>
+      </div>
+    </header>
+  </div>    
+<main>
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">クローゼットを作成</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>まずはここから!</li>
+            <li>あなたのクローゼットを</li>
+            <li>作りましょう。</li>
+            <li>初めの一歩</li>
+          </ul>
+          <a href="{% url 'closet_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">クローゼットをつくる</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">クローゼット一覧を見る</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>作成したクローゼットを</li>
+            <li>一覧で確認しよう!</li>
+            <li></li><br>
+            <li></li><br>
+          </ul>
+          <a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">クローゼット一覧を見る</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">アイテム一覧を見る</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>登録したアイテムを</li>
+            <li>一覧で確認しよう!</li>
+            <li>登録済のすべての</li>
+            <li>アイテムを表示します</li>
+          </ul>
+          <a href="{% url 'item_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレル一覧を見る</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<header>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h3 class="display-4 fw-normal">季節・シーンごとにアイテムを見る</h3>
+  </div>
+</header>
+     <div class="container">
+        <h1 class="visually-hidden">Features examples</h1>
+        <div class="container px-4 py-5" id="featured-3">
+          <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="feature col" style="margin:0 auto;">
+              <div class="feature-icon bg-primary bg-gradient">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
+              </div>
+              <h2>季節ごとのアイテム一覧</h2>
+              <p>季節ごとの登録アイテムを表示します。</p>
+              <p>季節を選ぶ</p>
+              <form class="" method="post" encttype="multipart/from-data">
+                {% csrf_token %}
+                <label><input type="radio" name="season" value="spring">春</label>
+                <label><input type="radio" name="season" value="summer">夏</label>
+                <label><input type="radio" name="season" value="fall">秋</label>
+                <label><input type="radio" name="season" value="winter">冬</label>
+                <input type="submit" name="season_check" value="選択">
+                </form>
+              <a href="#" class="icon-link">Call to action
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+              </a>
+            </div>
+            <div class="feature col" style="margin:0 auto;">
+              <div class="feature-icon bg-primary bg-gradient">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
+              </div>
+              <h2>シーン別のアイテム一覧</h2>
+              <p>シーンごとに登録アイテムを表示します。</p>
+              <a href="#" class="icon-link">Call to action
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+              </a>
             </div>
           </div>
-      </nav>
-    </div>
-  </header>
-<body>
-    <div class="container">
-        <h3>Your Tansuu2</h3>
-        <p>今日は何をしますか？？</p>
-        <p>ログイン中のユーザーは<a href="{% url 'user_information' request.user.pk %}">{{ request.user }}</a>です</p>
-        
-        <a href="{% url 'closet_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">クローゼットを作る</a>
-        <a href="{% url 'item_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレルを登録する</a>
-        <a href="{% url 'item_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレル一覧を見る</a>
-        <a href="{% url 'closet_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">クローゼット一覧を見る</a>
-    </div>
-    <div class="container">
-      <a href="{% url 'testview' %}"button class="w-100 btn btn-lg btn-primary" type="submit">新・ホームページ</a>
-    </div>
-</body>
+        </div>
+     </div>
+</main>
+<a href="{% url 'season_list_home' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)季節別</a></button><br>
+<a href="{% url 'testview' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)HTMLテスト</a></button>
 
+</body>
 {% endblock content %}

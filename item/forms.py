@@ -21,6 +21,18 @@ class ClosetForm(forms.ModelForm):
         labels = {'closet_name':'クローゼット名','closet_memo':'クローゼットメモ'}
 
 
+class SeasonSelectForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ('season',)
+        labels = {'season':'季節'}
+        widgets = {
+            'season':forms.RadioSelect()
+        }
+
+
+
+
 """
 class ClosetNewCreation(CreateView):
     template_name = 'contents/closet_create.html'

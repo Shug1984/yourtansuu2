@@ -40,8 +40,17 @@ class Item(models.Model):
     create_date = models.DateTimeField(verbose_name = '作成日', auto_now_add=True)
     update_date = models.DateTimeField(verbose_name = '更新日', auto_now=True)
     closet = models.ForeignKey(Closet, on_delete=models.PROTECT, null=True, default=None)
-    
 
+    def get_season(self,season_check):
+        if season_check == 'spring':
+            return 'spring'
+        elif season_check == 'summer':
+            return 'summer'
+        elif season_check == 'fall':
+            return 'fall'
+        else:
+            return 'winter'
+    
     def __str__(self):
         return self.item_name
 

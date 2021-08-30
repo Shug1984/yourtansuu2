@@ -1,10 +1,11 @@
+import datetime
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import Item, Closet
-from .forms import ItemForm, ClosetForm
+from .forms import ItemForm, ClosetForm, SeasonSelectForm
 
 
 def decode_base64_file(file_name, data):
@@ -108,6 +109,7 @@ def Itemupdateview(request, pk):
         form = ItemForm(instance = object_item)
     return render(request, 'contents/item_update.html',{'form':form, 'object_item':object_item})
 
+@login_required
 def ClosetCreateView(request):
     if request.method == 'POST':
         form = ClosetForm(request.POST)
@@ -120,31 +122,41 @@ def ClosetCreateView(request):
         form = ClosetForm()
     return render(request,'contents/closet_create.html', {'form':form})
 
+@login_required
 def ClosetCreateCompleteView(request):
     return render(request, 'contents/closet_create_complete.html')
 
 
+@login_required
 def ClosetListView(request):
     object_list = Closet.objects.filter(user_id = request.user)
     return render(request, 'contents/closet_list.html', {'object_list':object_list})
 
-"""
-def ClosetDetailView(request):
-    object_list = Item.objects.filter(user_id=request.user,closet)
-    return render(request, 'contents/closet_filter.html',{'object_list':object_list})
-"""
+def SeasonListHomeView(request):
+     if request.method == "POST":
+        season_check = request.POST['season']
+        season = Item.get_season(season_check)
+        object_list = Item.objects.filter(user_id = request.user, season=season)
+        return render(request, 'contents/season_list.html',{'object_list':object_list})
+
+
+def TestView(request):
+    return render(request, 'contents/testview.html')
+
+
+
 
 """
-def Itemlistview(request):
-    object_list = Item.objects.filter(user_id = request.user)
-    return render(request, 'contents/item_list.html',{'object_list':object_list})
-
-def Itemlisting(request):
-    item_list = Item.objects.filter(user_id = request.user)
-    paginator = Paginator(item_list, 10)
-
-    page_number = request.GET.get('page')
-    page_object = paginator.get_page(page_number)
-    return render(request, 'contents/paginator.html', {'page_object': page_object})
+ if request.method == "POST":
+        season = request.POST.get()
+        object_list = Item.objects.filter(user_id = request.user, season=season)
+        return render(request, 'contents/season_list.html',{'object_list':object_list})
+    else:
+        return redirect("testview")
+def SeasonListHomeView(request):
+    month = datetime.date.today().month
+    season = Item().get_season(month)
+    object_list = Item.objects.filter(user_id = request.user, season=season)
+    return render(request, 'contents/season_list.html',{'object_list':object_list})
 
 """

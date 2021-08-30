@@ -1,0 +1,10 @@
+<h4>これはHTMLのテストビューです</h4>
+
+<form class="" method="post" encttype="multipart/from-data">
+{% csrf_token %}
+<label><input type="radio" name="season" value="spring">春</label>
+<label><input type="radio" name="season" value="summer">夏</label>
+<label><input type="radio" name="season" value="fall">秋</label>
+<label><input type="radio" name="season" value="winter">冬</label>
+<input type="submit" name="season_check" value="選択">
+</form>

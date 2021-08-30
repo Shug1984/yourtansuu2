@@ -1,0 +1,32 @@
+{% extends 'contents/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+<div class="container">
+    <p>現在表示中の季節は""です</p>
+    <p>登録アイテム数：{{ object_list | length }}件</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>アイテム名称：</th>
+          <th>アイテム種類：</th>
+          <th>アイテムカラー：</th>
+          <th>購入日：</th>
+          <th>詳細へ：</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in object_list %}
+        <tr>
+          <th>#</th>
+          <th>{{ item.item_name }}</th>
+          <th>{{ item.get_item_type_display}}</th>
+          <th>{{ item.get_item_color_display}}</th>
+          <th>{{ item.purchase_date|upper }}</th>
+          <th><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
+        </tr>
+        {% endfor %}
+      </tbody>
+{% endblock content %}
