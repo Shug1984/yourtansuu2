@@ -133,11 +133,9 @@ def ClosetListView(request):
     return render(request, 'contents/closet_list.html', {'object_list':object_list})
 
 def SeasonListHomeView(request):
-     if request.method == "POST":
-        season_check = request.POST['season']
-        season = Item.get_season(season_check)
-        object_list = Item.objects.filter(user_id = request.user, season=season)
-        return render(request, 'contents/season_list.html',{'object_list':object_list})
+    season = request.GET.get('season', 'spring')
+    object_list = Item.objects.filter(user_id=request.user, season=season)
+    return render(request, 'contents/season_list.html',{'object_list':object_list})
 
 
 def TestView(request):

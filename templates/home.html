@@ -116,13 +116,12 @@
               <h2>季節ごとのアイテム一覧</h2>
               <p>季節ごとの登録アイテムを表示します。</p>
               <p>季節を選ぶ</p>
-              <form class="" method="post" encttype="multipart/from-data">
-                {% csrf_token %}
+              <form action="{% url 'season_list_home' %}" method="GET">
                 <label><input type="radio" name="season" value="spring">春</label>
                 <label><input type="radio" name="season" value="summer">夏</label>
                 <label><input type="radio" name="season" value="fall">秋</label>
                 <label><input type="radio" name="season" value="winter">冬</label>
-                <input type="submit" name="season_check" value="選択">
+                <input type="submit" value="選択">
                 </form>
               <a href="#" class="icon-link">Call to action
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
