@@ -116,15 +116,13 @@
               <h2>季節ごとのアイテム一覧</h2>
               <p>季節ごとの登録アイテムを表示します。</p>
               <p>季節を選ぶ</p>
-              <form class="" method="post" encttype="multipart/from-data">
-                {% csrf_token %}
+              <form action="{% url 'season_list_home' %}" method="GET">
                 <label><input type="radio" name="season" value="spring">春</label>
                 <label><input type="radio" name="season" value="summer">夏</label>
                 <label><input type="radio" name="season" value="fall">秋</label>
                 <label><input type="radio" name="season" value="winter">冬</label>
-                <input type="submit" name="season_check" value="選択">
-                </form>
-              <a href="#" class="icon-link">Call to action
+                <input type="submit" value="選択">
+              </form>
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
               </a>
             </div>
@@ -134,7 +132,15 @@
               </div>
               <h2>シーン別のアイテム一覧</h2>
               <p>シーンごとに登録アイテムを表示します。</p>
-              <a href="#" class="icon-link">Call to action
+              <p>シーンを選ぶ</p>
+              <form action="{% url 'occasion_list_home' %}" method="GET">
+                <label><input type="radio" name="occasion" value="daily_use">普段着</label>
+                <label><input type="radio" name="occasion" value="work_wear">仕事</label>
+                <label><input type="radio" name="occasion" value="active_wear">よそ行き</label>
+                <label><input type="radio" name="occasion" value="sports_wear">スポーツ</label>
+                <label><input type="radio" name="occasion" value="other_use">その他</label>
+                <input type="submit" value="選択">
+              </form>
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
               </a>
             </div>
@@ -143,7 +149,8 @@
      </div>
 </main>
 <a href="{% url 'season_list_home' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)季節別</a></button><br>
-<a href="{% url 'testview' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)HTMLテスト</a></button>
+<a href="{% url 'testview' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)HTMLテスト</a></button><br>
+<a href="{% url 'inquiry_form' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)問い合わせページテスト</a></button>
 
 </body>
 {% endblock content %}

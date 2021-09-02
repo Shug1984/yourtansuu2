@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (ItemCreate, Itemlistview, Itemcompleteview, Itemdetailview, Itemdeleteview, Itemdeleteview_complete, Itemupdateview, 
-ClosetCreateView, ClosetCreateCompleteView, ClosetListView, SeasonListHomeView, TestView
+ClosetCreateView, ClosetCreateCompleteView, ClosetListView, SeasonListHomeView, OccasionListHomeView, TestView
 )
 
 
@@ -17,5 +17,6 @@ urlpatterns = [
     path('closet-create-complete/', ClosetCreateCompleteView, name = 'closet_create_complete'),
     path('closet_list/',ClosetListView, name = 'closet_list'),
     path('season_list_home/', SeasonListHomeView, name = 'season_list_home'),
+    path('occasion_list_home/', OccasionListHomeView, name = 'occasion_list_home'),
     path('testview/', TestView, name = 'testview'),
     ] 

@@ -10,5 +10,6 @@ urlpatterns = [
     path('', topview, name = 'top' ),
     path('account/', include('account.urls')),
     path('contents/', include('item.urls')),
+    path('customerservice/', include('customerservice.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

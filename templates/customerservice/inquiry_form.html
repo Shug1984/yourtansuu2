@@ -1,0 +1,16 @@
+{% extends 'customerservice/base.html' %}
+{% load django_bootstrap5 %}
+
+
+{% block content %}
+<h1>これはcustomerservieのHTMLです。</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">問い合わせる</button>
+</form>
+
+
+
+
+{% endblock content %}

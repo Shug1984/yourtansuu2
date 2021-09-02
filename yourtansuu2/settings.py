@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'account.apps.AccountConfig',
     'item.apps.ItemConfig',
+    'customerservice.apps.CustomerserviceConfig',
 ]
 
 MIDDLEWARE = [

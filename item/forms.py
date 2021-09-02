@@ -32,7 +32,6 @@ class SeasonSelectForm(forms.ModelForm):
 
 
 
-
 """
 class ClosetNewCreation(CreateView):
     template_name = 'contents/closet_create.html'

@@ -133,30 +133,30 @@ def ClosetListView(request):
     return render(request, 'contents/closet_list.html', {'object_list':object_list})
 
 def SeasonListHomeView(request):
-     if request.method == "POST":
-        season_check = request.POST['season']
-        season = Item.get_season(season_check)
-        object_list = Item.objects.filter(user_id = request.user, season=season)
-        return render(request, 'contents/season_list.html',{'object_list':object_list})
+    season = request.GET.get('season')
+    object_list = Item.objects.filter(user_id=request.user, season=season)
+    return render(request, 'contents/season_list.html', {'object_list':object_list})
+       
+
+def OccasionListHomeView(request):
+    occasion = request.GET.get('occasion')
+    object_list = Item.objects.filter(user_id=request.user, occasion=occasion)
+    return render(request, 'contents/occasion_list.html', {'object_list':object_list})
 
 
 def TestView(request):
     return render(request, 'contents/testview.html')
 
 
-
-
-"""
+""" SeasonListHomeView(管澤オリジナルコード、不具合home.htmlで動作しない)
  if request.method == "POST":
-        season = request.POST.get()
-        object_list = Item.objects.filter(user_id = request.user, season=season)
-        return render(request, 'contents/season_list.html',{'object_list':object_list})
-    else:
-        return redirect("testview")
-def SeasonListHomeView(request):
-    month = datetime.date.today().month
-    season = Item().get_season(month)
-    object_list = Item.objects.filter(user_id = request.user, season=season)
-    return render(request, 'contents/season_list.html',{'object_list':object_list})
-
+         form = SeasonSelectForm(request.POST)
+         if form.is_valid():
+             season_check = request.POST['season']
+             print("HTMLから拾っているのは"+ season_check + "です")
+             object_list = Item.objects.filter(user_id = request.user, season=season_check)
+             return render(request, 'contents/season_list.html', {'object_list':object_list})
+     else:
+         form = SeasonSelectForm()
+     return render(request, 'contents/testview.html', {'form':form}) 
 """
