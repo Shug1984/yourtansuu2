@@ -132,12 +132,13 @@ def ClosetListView(request):
     object_list = Closet.objects.filter(user_id = request.user)
     return render(request, 'contents/closet_list.html', {'object_list':object_list})
 
+@login_required
 def SeasonListHomeView(request):
     season = request.GET.get('season')
     object_list = Item.objects.filter(user_id=request.user, season=season)
     return render(request, 'contents/season_list.html', {'object_list':object_list})
        
-
+@login_required
 def OccasionListHomeView(request):
     occasion = request.GET.get('occasion')
     object_list = Item.objects.filter(user_id=request.user, occasion=occasion)
@@ -146,6 +147,14 @@ def OccasionListHomeView(request):
 
 def TestView(request):
     return render(request, 'contents/testview.html')
+
+
+
+
+
+
+
+
 
 
 """ SeasonListHomeView(管澤オリジナルコード、不具合home.htmlで動作しない)

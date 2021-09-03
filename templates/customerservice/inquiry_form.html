@@ -1,15 +1,18 @@
 {% extends 'customerservice/base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 
 {% block content %}
-<h1>これはcustomerservieのHTMLです。</h1>
+<div class="container style="margin:100 auto">
+<h3>質問があれば聞いてみましょう</h3><br>
+<h5>以下に質問の内容を記入して送信ボタンを押してください</h5><br>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">問い合わせる</button>
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type="submit" content="問合せを送信" %}
 </form>
-
+</div>
 
 
 

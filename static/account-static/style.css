@@ -4,3 +4,16 @@ main {
     padding: px;
     margin: 2px;
 }
+
+.flex-container {
+    background-color: #dfdfdf;
+    display: flex;
+}
+
+.flex-item {
+    margin: 10px auto;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    background-color: #343434;
+    color: #fff;
+}

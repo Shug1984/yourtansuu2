@@ -5,12 +5,12 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal">ユーザー情報です</h1>
+  <h1 class="h3 mb-3 fw-normal">ログイン中のユーザー情報です</h1><br>
   <form action="", method = "get">
   <ul>
-  <p>名前：{{ user_information.last_name }}　{{ user_information.first_name }}</p>
-  <p>フリガナ：{{ user_information.last_kana }}　{{ user_information.first_kana }}</p>
-  <p>登録メールアドレス：{{ request.user }}(ユーザーID)</p>
+  <li>名前：{{ user_information.last_name }}　{{ user_information.first_name }}</li>
+  <li>フリガナ：{{ user_information.last_kana }}　{{ user_information.first_kana }}</li>
+  <li>登録メールアドレス：{{ request.user }}(ユーザーID)</li>
   </ul>
 
   <table class="table">
