@@ -11,7 +11,7 @@
   <div class = "container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid" style="margin:0 auto;">
-          <p><a class="navbar-brand" href="#">YourTansuu2</a></p>
+          <p><a class="navbar-brand" href="{% url 'home' %}">YourTansuu2</a></p>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -39,7 +39,7 @@
   </div>
 </header>
 <body>
-  <div class="container py-3">
+  <div class="container">
     <header>
       <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
         <h1 class="display-4 fw-normal">YourTansuu2へようこそ</h1>
@@ -50,7 +50,7 @@
   </div>    
 <main>
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    <div class="col">
+    <div class="col-lg-3">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
           <h4 class="my-0 fw-normal">クローゼットを作成</h4>
@@ -66,7 +66,8 @@
         </div>
       </div>
     </div>
-    <div class="col">
+    
+    <div class="col-lg-3">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
           <h4 class="my-0 fw-normal">クローゼット一覧を見る</h4>
@@ -82,7 +83,25 @@
         </div>
       </div>
     </div>
-    <div class="col">
+    
+    <div class="col-lg-3">
+      <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">アイテムを登録する</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>クローゼットを作成したら</li>
+            <li>アイテムを登録しましょう</li>
+            <li>登録数が増えると</li>
+            <li>管理がしやすくなります</li>
+          </ul>
+          <a href="{% url 'item_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アパレルを登録する</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-3">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
           <h4 class="my-0 fw-normal">アイテム一覧を見る</h4>
@@ -106,25 +125,16 @@
   </div>
 </header>
      <div class="container">
-        <h1 class="visually-hidden">Features examples</h1>
         <div class="container px-4 py-5" id="featured-3">
-          <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+          <div class="row g-4 py-5 row-cols-1 row-cols-lg-3" >
             <div class="feature col" style="margin:0 auto;">
               <div class="feature-icon bg-primary bg-gradient">
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
               </div>
               <h2>季節ごとのアイテム一覧</h2>
-              <p>季節ごとの登録アイテムを表示します。</p>
-              <p>季節を選ぶ</p>
-              <form action="{% url 'season_list_home' %}" method="GET">
-                <label><input type="radio" name="season" value="spring">春</label>
-                <label><input type="radio" name="season" value="summer">夏</label>
-                <label><input type="radio" name="season" value="fall">秋</label>
-                <label><input type="radio" name="season" value="winter">冬</label>
-                <input type="submit" value="選択">
-              </form>
+              <p>登録アイテムを季節ごとに一覧表示します。</p>
+              <a href="{% url 'season_gate' %}"button class="btn btn-md btn-primary" type="submit">季節を選ぶ</a></button>
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-              </a>
             </div>
             <div class="feature col" style="margin:0 auto;">
               <div class="feature-icon bg-primary bg-gradient">
@@ -132,15 +142,7 @@
               </div>
               <h2>シーン別のアイテム一覧</h2>
               <p>シーンごとに登録アイテムを表示します。</p>
-              <p>シーンを選ぶ</p>
-              <form action="{% url 'occasion_list_home' %}" method="GET">
-                <label><input type="radio" name="occasion" value="daily_use">普段着</label>
-                <label><input type="radio" name="occasion" value="work_wear">仕事</label>
-                <label><input type="radio" name="occasion" value="active_wear">よそ行き</label>
-                <label><input type="radio" name="occasion" value="sports_wear">スポーツ</label>
-                <label><input type="radio" name="occasion" value="other_use">その他</label>
-                <input type="submit" value="選択">
-              </form>
+              <a href="{% url 'occasion_gate' %}"button class="btn btn-md btn-primary" type="submit">シーンを選ぶ</a></button>
                 <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
               </a>
             </div>
@@ -148,9 +150,7 @@
         </div>
      </div>
 </main>
-<a href="{% url 'season_list_home' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)季節別</a></button><br>
 <a href="{% url 'testview' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)HTMLテスト</a></button><br>
-<a href="{% url 'inquiry_form' %}"button class="btn btn-lg btn-primary" type="submit">(作成中)問い合わせページテスト</a></button>
 
 </body>
 {% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'contents/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block header %}{% endblock header %}
+
+
+{% block content %}
+{{ block.super }}
+<div class="container">
+   <h1>クローゼット名の編集が完了しました。</h1>
+   <img src = "{% static 'account-static/closet_complete.jpg' %}" width="70%" height="30%" margin = "40px"><br>
+<a href="{% url 'closet_list' %}"button class="btn btn-sm btn-primary" type="submit">前のページに戻る</a></button>
+<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+</div>
+{% endblock content %}

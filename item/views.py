@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from .models import Item, Closet
-from .forms import ItemForm, ClosetForm, SeasonSelectForm
+from .models import Item, Closet, SEASON_CHOICES, OCCASION_CHOICES
+from .forms import ItemForm, ClosetForm, ClosetSelectForm, SeasonSelectForm
 
 
 def decode_base64_file(file_name, data):
@@ -58,10 +58,10 @@ def ItemCreate(request):
 @login_required
 def Itemcompleteview(request):
     return render(request, 'contents/item_complete.html')
-    
+
+
 @login_required
 def Itemlistview(request):
-    #print(request.GET['closet'])
     item_list = Item.objects.filter(user_id = request.user)
     if request.GET.get('closet'):
         closet = request.GET['closet']
@@ -74,11 +74,13 @@ def Itemlistview(request):
     page_object = paginator.get_page(page_number)
     return render(request, 'contents/item_list.html', {'page_object': page_object})
 
+
 @login_required
 def Itemdetailview(request, pk):
     #object_item = Closet.objects.filter(user_id = request.user, pk=pk)
     object_item = Item.objects.get(user_id = request.user, pk=pk)
     return render(request, 'contents/item_detail.html',{'object_item':object_item})
+
 
 @login_required
 def Itemdeleteview(request, pk):
@@ -93,9 +95,11 @@ def Itemdeleteview(request, pk):
     else:
         return render(request, 'contents/item_delete.html',{'object_item':object_item})
 
+
 @login_required
 def Itemdeleteview_complete(request):
     return render(request, 'contents/item_delete_complete.html')   
+
 
 @login_required
 def Itemupdateview(request, pk):
@@ -108,6 +112,7 @@ def Itemupdateview(request, pk):
     else:
         form = ItemForm(instance = object_item)
     return render(request, 'contents/item_update.html',{'form':form, 'object_item':object_item})
+
 
 @login_required
 def ClosetCreateView(request):
@@ -122,6 +127,7 @@ def ClosetCreateView(request):
         form = ClosetForm()
     return render(request,'contents/closet_create.html', {'form':form})
 
+
 @login_required
 def ClosetCreateCompleteView(request):
     return render(request, 'contents/closet_create_complete.html')
@@ -130,29 +136,80 @@ def ClosetCreateCompleteView(request):
 @login_required
 def ClosetListView(request):
     object_list = Closet.objects.filter(user_id = request.user)
-    return render(request, 'contents/closet_list.html', {'object_list':object_list})
+    #return render(request, 'contents/closet_list.html', {'object_list':object_list})
+
+    paginator = Paginator(object_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/closet_list.html', {'page_object': page_object})
+
+
+def ClosetUpdateView(request,pk):
+    object_item = Closet.objects.get(user_id = request.user, pk=pk)
+    if request.method == 'POST':
+       form = ClosetForm(request.POST, instance=object_item)
+       if form.is_valid():
+           form.save()
+           return redirect('closet_update_complete')
+    else:
+        form = ClosetForm(instance = object_item)
+    return render(request, 'contents/closet_update.html',{'form':form, 'object_item':object_item})
+
+
+def ClosetUpdateCompleteView(request):
+    return render(request, 'contents/closet_update_complete.html')
+
+
+def ClosetSelectView(request):
+    form = ClosetSelectForm()
+    return render(request,'contents/testview.html',{'form':form})
+
+
+
+
+@login_required
+def SeasonGateView(request):
+    return render(request, 'contents/season_gate.html')
+
 
 @login_required
 def SeasonListHomeView(request):
     season = request.GET.get('season')
     object_list = Item.objects.filter(user_id=request.user, season=season)
-    return render(request, 'contents/season_list.html', {'object_list':object_list})
-       
+    for item in SEASON_CHOICES:
+        if season == item[0]:
+            kisetsu = item[1]
+
+    paginator = Paginator(object_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/season_list.html', {'page_object': page_object,'kisetsu':kisetsu})
+
+
+@login_required
+def OccasionGateView(request):
+    return render(request, 'contents/occasion_gate.html')
+
+
 @login_required
 def OccasionListHomeView(request):
     occasion = request.GET.get('occasion')
     object_list = Item.objects.filter(user_id=request.user, occasion=occasion)
-    return render(request, 'contents/occasion_list.html', {'object_list':object_list})
+    for item in OCCASION_CHOICES:
+        if occasion == item[0]:
+            kikai = item[1]
+
+    paginator = Paginator(object_list, 10)
+
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+    return render(request, 'contents/occasion_list.html', {'page_object': page_object, 'kikai':kikai})
 
 
 def TestView(request):
     return render(request, 'contents/testview.html')
-
-
-
-
-
-
 
 
 

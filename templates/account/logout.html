@@ -1,14 +1,20 @@
-{% extends 'account/base.html' %}
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-{% block header %}
-{% endblock header %}
+
 
 {% block content %}
+<header>
+  <div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <p><a class="navbar-brand" href="{% url 'home' %}">YourTansuu2</a></p>
+        </div>
+        </nav>
+  </div>
+</header>
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal">ログアウトしました</h1>
-  {% csrf_token %} 
-<a href="{% url 'top' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
-</form>
+  <h1 class="h3 mb-3 fw-normal" style="text-align: center; vertical-align: middle">ログアウトしました</h1>
+  <a href="{% url 'top' %}"button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
 </div>
 {% endblock content %}

@@ -1,5 +1,6 @@
 {% extends 'contents/base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block header %}{% endblock header %}
 
@@ -7,6 +8,7 @@
 {% block content %}
 <div class="container">
 <h2>クローゼットを作成しました。</h2>
+<img src = "{% static 'account-static/closet_complete.jpg' %}" width="70%" height="30%" margin = "40px">
 <h4>どんどんアイテムを登録しましょう</h4>
 
 <a href="{% url 'item_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">アイテムを登録する</a></button>

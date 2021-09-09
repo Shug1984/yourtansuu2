@@ -1,5 +1,6 @@
 {% extends 'account/base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block header %}{% endblock header %}
 
@@ -29,9 +30,8 @@
 </table>
   </ul>
   </form>
-  <a href="{% url 'user_update' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
-  <a href="{% url 'user_control' %}"button class="btn btn-lg btn-primary" type="submit">アカウント情報へ戻る</a></button>
-  <a href="{% url 'home' %}" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+  <a href="{% url 'user_update' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報更新</a>
+  <a href="{% url 'home' %}" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
 <p>{{ message }}</p>
 </div>
 {% endblock content %}

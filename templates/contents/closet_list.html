@@ -7,14 +7,54 @@
 
 {% block content %}
 <div class="container">
-    <h2>クローゼット表示機能</h2>
-    {% for item in object_list %}
-    <ul>
-    <li><a href="{% url 'item_list' %}?closet={{ item.pk }}">{{ item.closet_name }}</a></li>
-    <p>{{ item.closet_memo }}</p>
-  </ul>
-    {% endfor %}
-</form>
+  <h2>クローゼット一覧</h2>
+  {% if page_object %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>クローゼット名称:</th>
+        <th>アイテム登録件数:</th>
+        <th>メモ:</th>
+        <th>クローゼットへ</th>
+        <th>クローゼット名を編集</th>
+        <th>クローゼットを削除</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in page_object %}
+      <tr>
+        <th>{{ forloop.counter0 | add:page_object.start_index }}</th>
+        <th><a href="{% url 'item_list' %}?closet={{ item.pk }}">{{ item.closet_name }}</a></th>
+        <th>登録されているアイテムは件です</th>
+        <th>{{ item.closet_memo }}</th>
+        <th><a href="{% url 'item_list' %}?closet={{ item.pk }}" button class="btn btn-sm btn-primary" type="submit">クローゼットの中をみる</a></th>
+        <th><a href="{% url 'closet_update' item.pk %}" button class="btn btn-sm btn-primary" type="submit">クローゼット名を編集する</a></th>
+        <th><a href="#" button class="btn btn-sm btn-primary" type="submit">クローゼットを削除する</a></th>
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% else %}
+    <p>まだアイテムが登録されていません</p>
+    {% endif %}
+</table>
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_object.has_previous %}
+      <a href="?page=1">&laquo; 1ページ目に戻る</a>
+      <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
+      {% endif %}
+      
+      <span class="current">
+        ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}
+      </span>
+      {% if page_object.has_next %}
+      <a href="?page={{ page_object.next_page_number }}">次のページ</a>
+      <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
 <a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 </div>
 {% endblock content %}

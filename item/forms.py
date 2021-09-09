@@ -21,6 +21,19 @@ class ClosetForm(forms.ModelForm):
         labels = {'closet_name':'クローゼット名','closet_memo':'クローゼットメモ'}
 
 
+class ClosetSelectForm(forms.ModelForm):
+    closet_location = forms.ModelChoiceField(queryset=Closet.objects.all())
+
+    class Meta:
+        model = Closet
+        fields = ('closet_name',)
+        labels = {'closet_name':'クローゼット名',}
+        widget = {
+            'closet_name': forms.CheckboxSelectMultiple
+        }
+
+
+
 class SeasonSelectForm(forms.ModelForm):
     class Meta:
         model = Item

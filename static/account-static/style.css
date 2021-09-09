@@ -5,6 +5,16 @@ main {
     margin: 2px;
 }
 
+h1 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .flex-container {
     background-color: #dfdfdf;
     display: flex;
@@ -17,3 +27,8 @@ main {
     background-color: #343434;
     color: #fff;
 }
+
+.btn {
+    margin-bottom: 10px;
+}
+

@@ -5,6 +5,15 @@
 {% endblock header %}
 
 {% block content %}
+<header>
+  <div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <p><a class="navbar-brand" href="{% url 'top' %}">YourTansuu2</a></p>
+        </div>
+        </nav>
+  </div>
+</header>
 <div class="container">
   <h1 class="h3 mb-3 fw-normal">ログインしてください</h1>
   <form class="form-signin" method='post'>

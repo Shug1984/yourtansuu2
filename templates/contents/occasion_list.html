@@ -4,8 +4,8 @@
 {% block content %}
 
 <div class="container">
-    <p>現在表示中のシーンはです</p>
-    <p>登録アイテム数：{{ object_list | length }}件</p>
+    <p>現在表示中のシーンは{{ kikai }}です</p>
+    <p>登録アイテム数：{{ page_object | length }}件</p>
     <table class="table">
       <thead>
         <tr>
@@ -18,9 +18,9 @@
         </tr>
       </thead>
       <tbody>
-        {% for item in object_list %}
+        {% for item in page_object %}
         <tr>
-          <th>#</th>
+          <th>{{ forloop.counter0 | add:page_object.start_index }}</th>
           <th>{{ item.item_name }}</th>
           <th>{{ item.get_item_type_display}}</th>
           <th>{{ item.get_item_color_display}}</th>
@@ -29,4 +29,22 @@
         </tr>
         {% endfor %}
       </tbody>
+    </table>
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_object.has_previous %}
+              <a href="?page=1">&laquo; 1ページ目に戻る</a>
+              <a href="?page={{ page_object.previous_page_number }}">前のページ</a>
+          {% endif %}
+  
+          <span class="current">
+              ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}.
+          </span>
+  
+          {% if page_object.has_next %}
+              <a href="?page={{ page_object.next_page_number }}">次のページ</a>
+              <a href="?page={{ page_object.paginator.num_pages }}">最後のページ &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
 {% endblock content %}

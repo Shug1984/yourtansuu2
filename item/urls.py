@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (ItemCreate, Itemlistview, Itemcompleteview, Itemdetailview, Itemdeleteview, Itemdeleteview_complete, Itemupdateview, 
-ClosetCreateView, ClosetCreateCompleteView, ClosetListView, SeasonListHomeView, OccasionListHomeView, TestView
+ClosetCreateView, ClosetCreateCompleteView, ClosetListView, ClosetUpdateView, ClosetUpdateCompleteView, SeasonGateView, SeasonListHomeView, 
+OccasionGateView, OccasionListHomeView, TestView
 )
 
 
@@ -15,8 +16,12 @@ urlpatterns = [
     path('item-update/<int:pk>/', Itemupdateview, name = 'item_update'),
     path('closet-create/', ClosetCreateView, name = 'closet_create'),
     path('closet-create-complete/', ClosetCreateCompleteView, name = 'closet_create_complete'),
-    path('closet_list/',ClosetListView, name = 'closet_list'),
-    path('season_list_home/', SeasonListHomeView, name = 'season_list_home'),
-    path('occasion_list_home/', OccasionListHomeView, name = 'occasion_list_home'),
+    path('closet-list/', ClosetListView, name = 'closet_list'),
+    path('closet-update/<int:pk>/', ClosetUpdateView, name = 'closet_update'),
+    path('closet-update-complete/', ClosetUpdateCompleteView, name = 'closet_update_complete'),
+    path('season-gate/', SeasonGateView, name = 'season_gate'),
+    path('season-list_home/', SeasonListHomeView, name = 'season_list_home'),
+    path('occasion-gate/', OccasionGateView, name = 'occasion_gate'),
+    path('occasion-list-home/', OccasionListHomeView, name = 'occasion_list_home'),
     path('testview/', TestView, name = 'testview'),
     ] 
