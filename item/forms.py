@@ -28,10 +28,11 @@ class ClosetSelectForm(forms.ModelForm):
         model = Closet
         fields = ('closet_name',)
         labels = {'closet_name':'クローゼット名',}
+        """
         widget = {
             'closet_name': forms.CheckboxSelectMultiple
         }
-
+        """
 
 
 class SeasonSelectForm(forms.ModelForm):

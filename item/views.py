@@ -162,7 +162,8 @@ def ClosetUpdateCompleteView(request):
 
 
 def ClosetSelectView(request):
-    form = ClosetSelectForm()
+    object_list = Closet.objects.get(user_id=request.user, pk=pk)
+    form = ClosetSelectForm(instance = object_list)
     return render(request,'contents/testview.html',{'form':form})
 
 

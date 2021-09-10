@@ -1,8 +1,11 @@
-{% load static %}
+{% extends 'contents/base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
+
 
 {% block content %}
 <div class="container">
+  <p>これはテストビューです</p>
   {{ form.as_p }}
 
 
