@@ -23,7 +23,7 @@
           <th>{{ item.item_name }}</th>
           <th>{{ item.get_item_type_display}}</th>
           <th>{{ item.get_item_color_display}}</th>
-          <th>{{ item.purchase_date|upper }}</th>
+          <th>{{ item.purchase_date | date:"Y年m月d日(D)" }}</th>
           <th><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></th>
         </tr>
         {% endfor %}

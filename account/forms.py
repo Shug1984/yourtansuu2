@@ -3,6 +3,7 @@ from django.contrib.auth.forms import User, ReadOnlyPasswordHashField, PasswordC
 from django.contrib.auth import get_user_model
 
 from .models import MyUser
+from item.forms import MONTHS
  
  
 class UserCreationForm(forms.ModelForm):
@@ -13,13 +14,17 @@ class UserCreationForm(forms.ModelForm):
         model = MyUser
         fields = ('email','password1','password2','last_name','first_name','last_kana',
             'first_kana','zip_code','region_name','city_name',
-            'street_name','building_name','tel','gender')
+            'street_name','building_name','tel','gender','date_of_birth')
         
         labels = {
             'email':'メールアドレス','password1':'パスワード','password2':'パスワード確認','last_name':'姓','first_name':'名',
             'last_kana':'フリガナ(姓)','first_kana':'フリガナ(名)','zip_code':'郵便番号',
             'region_name':'都道府県','city_name':'市町村名','street_name':'丁目・番地',
-            'building_name':'建物名','tel':'電話番号','gender':'性別'}
+            'building_name':'建物名','tel':'電話番号','gender':'性別', 'date_of_birth':'生年月日'}
+
+        widgets = {
+            'date_of_birth': forms.SelectDateWidget(years = [x for x in range(1920,2040)], months = MONTHS)
+        }
 
         help_texts = {} 
 
@@ -46,13 +51,17 @@ class UserChangeForm(forms.ModelForm):
         model = MyUser
         fields = ('last_name','first_name','last_kana',
             'first_kana','zip_code','region_name','city_name',
-            'street_name','building_name','tel','gender')
+            'street_name','building_name','tel','gender','date_of_birth')
         
         labels = {
             'last_name':'姓','first_name':'名',
             'last_kana':'フリガナ(姓)','first_kana':'フリガナ(名)','zip_code':'郵便番号',
             'region_name':'都道府県','city_name':'市町村名','street_name':'丁目・番地',
-            'building_name':'建物名','tel':'電話番号','gender':'性別'}
+            'building_name':'建物名','tel':'電話番号','gender':'性別','date_of_birth':'生年月日'}
+        
+        widgets = {
+            'date_of_birth': forms.SelectDateWidget(years = [x for x in range(1920,2040)], months = MONTHS)
+        }
 
 
 class UserForm(forms.ModelForm):
@@ -75,7 +84,6 @@ class UserForm(forms.ModelForm):
             'building_name':'建物名','tel':'電話番号','gender':'性別'
         }
         
-       
         help_texts = {}
 
         def save(self, commit=True):

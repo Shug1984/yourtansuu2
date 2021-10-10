@@ -1,22 +1,27 @@
 {% extends 'contents/base.html' %}
-{% load django_bootstrap5 %}
+{% load django_bootstrap5 humanize custom_pagination %}
 
-{% block header %}{% endblock header %}
-
-
-
-{% block content %}
+{% block no_sidebar_content %}
 <div class="container">
-    {{ form.errors }}
-<form action='' method='POST' enctype="multipart/form-data">
-    <h2>アパレル登録機能</h2>
-    {% csrf_token %}
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    エラーが発生しました。
+    {% endif %}
+    {% for field, error_list in form.errors.items %}
+    <p>{{ error_list }}</p>{% endfor %}
+  </div>
+  <form action='' method='POST' enctype="multipart/form-data">
+    <h2 class="text_center space_top">アパレル登録機能</h2>{% csrf_token %}
     {% bootstrap_form form %}
     <input type = 'hidden' name = 'action' value = 'confirm'>
-    {% bootstrap_button button_type="submit" content="新規登録" %}
     <input type="hidden" id="id_item_image_base64" name="item_image_base64" />
-</form>
-<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+    {% bootstrap_button button_type="submit" content="新規登録" %}
+  </form>
+  {% for field in form %}
+  {{ field.item_name }}
+  {% endfor %}
+
+  <a href="{% url 'home' %}" style="margin-top: 7px;" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 </div>
 
 <script>
@@ -35,4 +40,4 @@
   }
   document.getElementById('id_item_image').addEventListener("change", upload_img);
 </script>
-{% endblock content %}
+{% endblock no_sidebar_content %}

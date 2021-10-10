@@ -9,11 +9,11 @@
 {{ block.super }}
 <div class="container">
     <form action ='' method='POST'>
+        <h2 style="text-align: center;" id="space_top">アパレル登録情報の編集</h2>
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button button_type="submit" content="更新する" %}
     </form>
-<a href="{% url 'item_detail' object_item.pk %}"button class="btn btn-sm btn-primary" type="submit">前のページに戻る</a></button>
-<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+<a href="{% url 'item_detail' object_item.pk %}" id="space_top" button class="btn btn-md btn-primary" type="submit">前のページに戻る</a></button>
 </div>
 {% endblock content %}

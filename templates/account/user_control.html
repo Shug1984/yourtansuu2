@@ -9,9 +9,9 @@
 <h1>アカウント情報の管理ページです</h1>
 <h2>今日は何をしますか？？</h2>
 
-<a href="{% url 'user_information' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報</a></button>
-<a href="{% url 'user_update' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
-<a href="{% url 'change_password' request.user.pk %}"button class="btn btn-lg btn-primary" type="submit">パスワード変更</a></button>
+<a href="{% url 'user_information' request.user.pk %}" id="space" button class="btn btn-lg btn-primary" type="submit">ユーザー情報</a></button>
+<a href="{% url 'user_update' request.user.pk %}" id="space" button class="btn btn-lg btn-primary" type="submit">ユーザー情報更新</a></button>
+<a href="{% url 'change_password' request.user.pk %}" id="space" button class="btn btn-lg btn-primary" type="submit">パスワード変更</a></button>
 </div>
 
 {% endblock content %}

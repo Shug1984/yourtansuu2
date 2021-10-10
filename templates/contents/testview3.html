@@ -1,0 +1,23 @@
+{% extends 'contents/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block header %}{% endblock header %}
+
+
+
+{% block content %}
+<h2>これはテストビュー2HTMLです</h2>
+
+{% for item in object_list %}
+{{ item.user }}<br>
+{{ item.item_name }}<br>
+{{ item.purchase_date }}<br>
+{{ item.pricing }}<br>
+
+
+{% endfor %}
+
+
+
+{% endblock content %}
+

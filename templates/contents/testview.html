@@ -1,17 +1,34 @@
 {% extends 'contents/base.html' %}
 {% load django_bootstrap5 %}
-{% load static %}
+
+{% block header %}{% endblock header %}
+
 
 
 {% block content %}
-<div class="container">
-  <p>これはテストビューです</p>
-  {{ form.as_p }}
+{{ block.super }}
+<body>
+    <article>
+        <div class="side">
+          <p>サイドバー</p>
+        </div> 
+        <div class="content">
+          <p>メインコンテンツ</p>
+        </div>
+      </article>
+</body>
+
+<script>
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', () =>{
+            console.log('クリックされました');
+        });
+        
+
+</script>
 
 
-</div>
+<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
 {% endblock content %}
-
-
 
 

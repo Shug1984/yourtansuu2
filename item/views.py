@@ -1,11 +1,15 @@
 import datetime
+import json
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.db.models import Count
+
 from .models import Item, Closet, SEASON_CHOICES, OCCASION_CHOICES
-from .forms import ItemForm, ClosetForm, ClosetSelectForm, SeasonSelectForm
+from .forms import ItemForm, ClosetForm, SearchForm
 
 
 def decode_base64_file(file_name, data):
@@ -63,21 +67,49 @@ def Itemcompleteview(request):
 @login_required
 def Itemlistview(request):
     item_list = Item.objects.filter(user_id = request.user)
+    search_form = SearchForm(request.GET or None)
+    if search_form.is_valid():
+        input_form = request.GET.get('input_form')
+        sort_form = request.GET.get('sort_form')
+        if input_form:
+            item_list = item_list.filter(item_name__icontains=input_form)
+    
+        if sort_form:
+            item_list = item_list.order_by(sort_form)
+        
+    closet_list = [{ 'id':None, 'closet_name':'なし' }]+[{'id': obj.id, 'closet_name': obj.closet_name} for obj in Closet.objects.filter(user=request.user)]
     if request.GET.get('closet'):
         closet = request.GET['closet']
         item_list = item_list.filter(closet=closet)
 
+    object_list = Closet.objects.filter(user_id = request.user)
+
+    today = datetime.date.today()
+    
     """import pdb;pdb.set_trace()"""
     paginator = Paginator(item_list, 10)
 
     page_number = request.GET.get('page')
     page_object = paginator.get_page(page_number)
-    return render(request, 'contents/item_list.html', {'page_object': page_object})
+    return render(request, 'contents/item_list.html', {
+        'page_object': page_object, 'closet_list':closet_list,'today':today,'paginator':paginator,
+        'search_form':search_form,'object_list':object_list
+        })
 
 
 @login_required
+def ClosetChangeView(request):
+    post_data = json.loads(request.body.decode("utf-8"))
+    item_id = post_data.get('item_id')
+    closet_id = post_data.get('closet_id')
+    item = Item.objects.get(pk = item_id)
+    item.closet_id = closet_id
+    item.save()
+    return JsonResponse({})
+    
+
+@login_required
 def Itemdetailview(request, pk):
-    #object_item = Closet.objects.filter(user_id = request.user, pk=pk)
     object_item = Item.objects.get(user_id = request.user, pk=pk)
     return render(request, 'contents/item_detail.html',{'object_item':object_item})
 
@@ -136,8 +168,7 @@ def ClosetCreateCompleteView(request):
 @login_required
 def ClosetListView(request):
     object_list = Closet.objects.filter(user_id = request.user)
-    #return render(request, 'contents/closet_list.html', {'object_list':object_list})
-
+    
     paginator = Paginator(object_list, 10)
 
     page_number = request.GET.get('page')
@@ -145,6 +176,7 @@ def ClosetListView(request):
     return render(request, 'contents/closet_list.html', {'page_object': page_object})
 
 
+@login_required
 def ClosetUpdateView(request,pk):
     object_item = Closet.objects.get(user_id = request.user, pk=pk)
     if request.method == 'POST':
@@ -157,26 +189,33 @@ def ClosetUpdateView(request,pk):
     return render(request, 'contents/closet_update.html',{'form':form, 'object_item':object_item})
 
 
+@login_required
 def ClosetUpdateCompleteView(request):
     return render(request, 'contents/closet_update_complete.html')
 
 
-def ClosetSelectView(request):
-    object_list = Closet.objects.get(user_id=request.user, pk=pk)
-    form = ClosetSelectForm(instance = object_list)
-    return render(request,'contents/testview.html',{'form':form})
+def ClosetDeleteView(request,pk):
+    object_item = Closet.objects.get(user_id = request.user, pk=pk)
+    if request.method == "POST":
+        if request.POST.get('button','') == 'confirm':
+            object_item.delete()
+            return redirect('closet_delete_complete')
+    
+    else:
+        return render(request, 'contents/closet_delete.html',{'object_item':object_item})
 
 
+def ClosetDeleteCompleteView(request):
+    return render(request, 'contents/closet_delete_complete.html')
 
-
+   
 @login_required
 def SeasonGateView(request):
     return render(request, 'contents/season_gate.html')
 
 
 @login_required
-def SeasonListHomeView(request):
-    season = request.GET.get('season')
+def SeasonListHomeView(request,season):
     object_list = Item.objects.filter(user_id=request.user, season=season)
     for item in SEASON_CHOICES:
         if season == item[0]:
@@ -195,13 +234,12 @@ def OccasionGateView(request):
 
 
 @login_required
-def OccasionListHomeView(request):
-    occasion = request.GET.get('occasion')
+def OccasionListHomeView(request, occasion):
     object_list = Item.objects.filter(user_id=request.user, occasion=occasion)
     for item in OCCASION_CHOICES:
         if occasion == item[0]:
             kikai = item[1]
-
+    
     paginator = Paginator(object_list, 10)
 
     page_number = request.GET.get('page')
@@ -210,20 +248,21 @@ def OccasionListHomeView(request):
 
 
 def TestView(request):
-    return render(request, 'contents/testview.html')
+    if request.method == "POST":
+        target = request.POST.get('sorting_system')
+        print(target)
+        object_list = Item.objects.filter(user_id=request.user).order_by(target).reverse()
+        print(object_list)
+        return render(request, 'contents/testview2.html',{'object_list':object_list})
+    
+    else:
+        return render(request, 'contents/testview.html')
 
-
-
-
-""" SeasonListHomeView(管澤オリジナルコード、不具合home.htmlで動作しない)
- if request.method == "POST":
-         form = SeasonSelectForm(request.POST)
-         if form.is_valid():
-             season_check = request.POST['season']
-             print("HTMLから拾っているのは"+ season_check + "です")
-             object_list = Item.objects.filter(user_id = request.user, season=season_check)
-             return render(request, 'contents/season_list.html', {'object_list':object_list})
-     else:
-         form = SeasonSelectForm()
-     return render(request, 'contents/testview.html', {'form':form}) 
-"""
+    if request.method == "POST":
+        query = request.POST.get('search_engine')
+        print(query)
+        object_list = Item.objects.filter(user_id=request.user,item_name__icontains=query)
+        print(object_list)
+        return render(request, 'contents/testview3.html', {'object_list':object_list})
+    
+    return render(request,'contents/testview.html')

@@ -72,7 +72,7 @@ class UserChangeView(LoginRequiredMixin, FormView):
         return {
             'last_name':user.last_name, 'first_name':user.first_name, 'last_kana':user.last_kana, 'first_kana':user.first_kana,
             'zip_code':user.zip_code, 'region_name':user.region_name, 'city_name':user.city_name, 'street_name':user.street_name,
-            'building_name':user.building_name, 'tel':user.tel, 'gender':user.gender,
+            'building_name':user.building_name, 'tel':user.tel, 'gender':user.gender,'date_of_birth':user.date_of_birth,
         }
     
     def form_valid(self, form):
@@ -89,6 +89,7 @@ class UserChangeView(LoginRequiredMixin, FormView):
         user.building_name = form.cleaned_data['building_name']
         user.tel = form.cleaned_data['tel']
         user.gender = form.cleaned_data['gender']
+        user.date_of_birth = form.cleaned_data['date_of_birth']
         
         user.save()
         return super().form_valid(form)

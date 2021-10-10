@@ -7,10 +7,12 @@
 
 {% block content %}
 <div class="container">
-<h1>アイテム登録成功(仮画面)</h1>
-<h5>リストに登録しました！</h5>
-<a href="{% url 'item_list' %}"button class="w-100 btn btn-lg btn-primary" type="submit">一覧で確認する</a>
-<a href="{% url 'item_create' %}"button class="w-100 btn btn-lg btn-primary" type="submit">続けて次のアイテムを登録する</a></button>
-<a href="{% url 'home' %}"button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
+    <div style="text-align: center;">
+        <h1>アイテム登録成功</h1>
+        <h5>リストに登録しました！</h5>
+        <a href="{% url 'item_list' %}" id="space_top" button class="w-33 btn btn-lg btn-primary" type="submit">一覧で確認する</a>
+        <a href="{% url 'item_create' %}" id="space_top" button class="w-33 btn btn-lg btn-primary" type="submit">続けて次のアイテムを登録する</a></button>
+        <a href="{% url 'home' %}" id="space_top" button class="w-33 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
+    </div>
 </div>
 {% endblock content %}

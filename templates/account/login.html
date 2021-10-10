@@ -1,23 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'account/base_signup.html' %}
 {% load django_bootstrap5 %}
 
 {% block header %}
 {% endblock header %}
 
-{% block content %}
-<header>
-  <div class = "container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <p><a class="navbar-brand" href="{% url 'top' %}">YourTansuu2</a></p>
-        </div>
-        </nav>
-  </div>
-</header>
+{% block no_sidebar_content %}
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal">ログインしてください</h1>
-  <form class="form-signin" method='post'>
-    {% csrf_token %} 
+  <h2 class="text_center space_top space">ログインしてください</h2>
+  <form class="form-signin" method='post'>{% csrf_token %} 
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name='email_data' required autofocus>
       <label for="floatingInput">メールアドレス</label>
@@ -31,8 +21,9 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">ログインする</button>
-    <a href="{% url 'reset_password' %}"button type= "button" class ="btn btn-secondary btn-sm" type="submit">パスワードを忘れちゃった！！</a></button>
+    <button class="btn btn-md btn-primary" type="submit">ログインする</button>
+    <a href="{% url 'top' %}" button type= "button" class ="btn btn-md btn-primary" type="submit">トップに戻る</a></button>
+    <a href="{% url 'reset_password' %}" id="space_top" button type= "button" class ="btn btn-secondary btn-sm" type="submit">パスワードを忘れちゃった！！</a></button>
   </form>
 </div>
-{% endblock content %}
+{% endblock no_sidebar_content %}

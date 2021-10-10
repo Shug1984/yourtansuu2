@@ -1,20 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'account/base_signup.html' %}
 {% load django_bootstrap5 %}
 
-{% block header %}
-{% endblock header %}
 
-{% block content %}
+{% block no_sidebar_content %}
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal">新規登録してください</h1>
-    <h2>ユーザー登録フォーム</h2>  
-  <form class="form-signin" method='post' novalidate>
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <p>生年月日<input type="date"> {{ form.date_of_birth }}</p> 
-    <button class="w-100 btn btn-lg btn-primary">{% bootstrap_button button_type="submit" content="登録する" %}</button>
-    <a href="{% url 'top' %}" button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
-</form>
-<p>{{ message }}</p>
+  <h2 class="text_center space_top">新規ユーザー登録</h2>
+    <form class="form-signin" method='post' novalidate>
+      {% csrf_token %}
+      {% bootstrap_form form %} 
+      {% bootstrap_button button_type="submit" content="登録する" %}
+    </form>
+    <a href="{% url 'top' %}" class="w-100 btn btn-md btn-primary space_top" type="submit">トップに戻る</a>
+    <p>{{ message }}</p>
 </div>
-{% endblock content %}
+{% endblock no_sidebar_content %}

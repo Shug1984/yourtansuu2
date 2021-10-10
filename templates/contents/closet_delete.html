@@ -1,0 +1,30 @@
+{% extends 'contents/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block no_sidebar_content %}
+<div class="container">
+    <h2 class="text_center space_top">クローゼットを削除しますか？</h2>
+    <div style="text-align: center;">
+        <form action='' method="POST">{% csrf_token %}
+            {% if object_item.item_count > 0 %}
+            <p class="alert alert-warning">
+                削除しようとしているクローゼットにはアイテムが登録されています。<br>
+                クローゼットを削除する場合は、<br>
+                登録しているアイテムを削除するか別のクローゼットに移動してください</p>
+            {% endif %}
+        </form>
+        </div>
+            <ul class="text_center">
+                <h5>クローゼット名：{{ object_item.closet_name }}</h5>
+                <h5>メモ：{{ object_item.closet_memo }}</h5>
+                <h5>アイテム登録件数：{{ object_item.item_count }}</h5>
+            </ul>
+            {% if object_item.item_count == 0 %}
+            <button type="submit" name="button" value="confirm">削除します</button>
+            {% else %}
+            <a href="{% url 'item_list' %}?closet={{ object_item.pk }}" class="btn btn-md btn-primary space_bottom">クローゼットを編集する</a>
+            {% endif %}
+    </div>
+    <a href="{% url 'home' %}" class="w-100 btn btn-md btn-primary">ホームに戻る</a>
+</div>
+{% endblock no_sidebar_content %}

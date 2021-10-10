@@ -17,7 +17,7 @@
         
         <div class="col-lg-3" style="text-align: center">
             <img class="bd-placeholder-img rounded-circle" src = "{% static 'account-static/spring.jpg' %}" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text></svg>
-            <form action="{% url 'season_list_home' %}" method="GET">
+            <form action="{% url 'season_list_home' 'spring' %}" method="GET">
                 <h2><input type="hidden" name="season" value="spring">春</h2>
                 <p>春服の一覧を表示します</p>
                 <p><input type="submit"　button class="btn btn-lg btn-primary" value="春のアイテム一覧へ">
@@ -26,7 +26,7 @@
         
         <div class="col-lg-3" style="text-align: center">
             <img class="bd-placeholder-img rounded-circle" src = "{% static 'account-static/summer.jpg' %}" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text></svg>
-            <form action="{% url 'season_list_home' %}" method="GET">
+            <form action="{% url 'season_list_home' 'summer' %}" method="GET">
                 <h2><input type="hidden" name="season" value="summer">夏</h2>
                 <p>夏服の一覧を表示します</p>
                 <p><input type="submit"　button class="btn btn-lg btn-primary" value="夏のアイテム一覧へ">
@@ -35,7 +35,7 @@
         
         <div class="col-lg-3" style="text-align: center">
             <img class="bd-placeholder-img rounded-circle" src = "{% static 'account-static/fall.jpg' %}" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text></svg>
-            <form action="{% url 'season_list_home' %}" method="GET">
+            <form action="{% url 'season_list_home' 'fall' %}" method="GET">
                 <h2><input type="hidden" name="season" value="fall">秋</h2>
                 <p>秋服の一覧を表示します</p>
                 <p><input type="submit"　button class="btn btn-lg btn-primary" value="秋のアイテム一覧へ">
@@ -44,7 +44,7 @@
 
         <div class="col-lg-3" style="text-align: center">
             <img class="bd-placeholder-img rounded-circle" src = "{% static 'account-static/winter.jpg' %}" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"></text></svg>
-            <form action="{% url 'season_list_home' %}" method="GET">
+            <form action="{% url 'season_list_home' 'winter' %}" method="GET">
                 <h2><input type="hidden" name="season" value="winter">冬</h2>
                 <p>冬服の一覧を表示します</p>
                 <p><input type="submit"　button class="btn btn-lg btn-primary" value="冬のアイテム一覧へ">

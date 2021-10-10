@@ -7,7 +7,7 @@
 {% block content %}
 {{ block.super }}
 <div class = "container">
-<h1>入力内容確認</h1>
+<h1 id="text_center">入力内容確認</h1>
 <table class="table">
     <tr>
         <th>アイテム種類：</th>
@@ -68,7 +68,7 @@
     {% endfor %}
     <input type = 'hidden' name = 'action' value='complete'>
     <input type="hidden" name="item_image_base64" value="{{ item_image_base64 }}" />
-<button class="btn btn-lg btn-primary">登録する</button>
+<button class="btn btn-md btn-primary">登録する</button>
 </form>
 <form action = '.' method="post">
     {% csrf_token %}
@@ -76,7 +76,7 @@
     {{ field.as_hidden }}
     {% endfor %}
     <input type = 'hidden' name = 'action' value='input'>
-<button class="w-100 btn btn-lg btn-primary">入力に戻る</button>
+<button class="w-100 btn btn-md btn-primary" id="space_top">入力に戻る</button>
 </form>
 
 </div>

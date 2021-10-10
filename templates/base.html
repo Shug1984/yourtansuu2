@@ -15,17 +15,21 @@
     <title>Yourtansuu2</title>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    {% block extraheader %}{% endblock extraheader %}
   </head>
   
   <body>
     <main>
       <div class="container">
         {% block navbar %}{% endblock navbar %}
-        {% block added_tag %}{% endblock added_tag %}
-        {% block header %}{% endblock header%}
-        {% block content %}{% endblock content %}
-        <p>&copy; 2021 Masaru Sugasawa.</p>
+        {% block no_sidebar_content %}{% endblock no_sidebar_content %}
+        <div class="wrapping">
+          <div class="side">
+          {% block sidebar %}{% endblock sidebar %}
+        </div>
+        <div class="content">
+          {% block content %}{% endblock content %}
+        </div>
+        </div>
       </div>
     </main>
   </body>
