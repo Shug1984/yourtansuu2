@@ -1,20 +1,18 @@
 {% extends 'account/base.html' %}
-{% load django_bootstrap5 %}
-{% load static %}
+{% load django_bootstrap5 static %}
 
-{% block header %}{% endblock header %}
-
-{% block content %}
+{% block no_sidebar_content %}
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal">ログイン中のユーザー情報です</h1><br>
+  <h2 class="text_center space_top">ログイン中のユーザー情報です</h2>
   <form action="", method = "get">
-  <ul>
-  <li>名前：{{ user_information.last_name }}　{{ user_information.first_name }}</li>
-  <li>フリガナ：{{ user_information.last_kana }}　{{ user_information.first_kana }}</li>
-  <li>登録メールアドレス：{{ request.user }}(ユーザーID)</li>
-  </ul>
+    <ul>
+      <h5>名前：{{ user_information.last_name }}　{{ user_information.first_name }}</h5>
+      <h6>フリガナ：{{ user_information.last_kana }}　{{ user_information.first_kana }}</h6>
+      <h6>登録メールアドレス：{{ request.user }}(ユーザーID)</h6>
+    </ul>
+  
 
-  <table class="table">
+  <table class="table table-bordered text_center">
     <thead>
       <th>郵便番号：</th>
       <th>住所：</th>
@@ -29,13 +27,12 @@
       <td>{{ user_information.get_gender_display }}</td>
       <td>{{ user_information.date_of_birth |  date:"Y年m月d日(D)" }}</td>
     </tbody>
-</table>
-  </ul>
+  </table>
   </form>
-  <a href="{% url 'user_update' request.user.pk %}" id="space_bottom" button class="btn btn-md btn-primary" type="submit">ユーザー情報更新</a>
-  <a href="{% url 'change_password' request.user.pk %}" id="space_bottom" button class="btn btn-md btn-primary" type="submit">パスワードを変更する</a>
-  <a href="{% url 'home' %}" id="space_bottom" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
-<p>{{ message }}</p>
+  <a href="{% url 'user_update' request.user.pk %}" class="btn btn-md btn-primary space_bottom" type="submit">ユーザー情報更新</a>
+  <a href="{% url 'change_password' request.user.pk %}" class="btn btn-md btn-primary space_bottom" type="submit">パスワードを変更する</a><br>
+  <a href="{% url 'home' %}" class="btn btn-md btn-info" type="submit">ホームに戻る</a>
+  <p>{{ message }}</p>
 </div>
-{% endblock content %}
+{% endblock no_sidebar_content %}
 

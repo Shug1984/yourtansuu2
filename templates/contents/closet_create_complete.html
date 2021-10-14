@@ -3,11 +3,10 @@
 
 
 {% block no_sidebar_content %}
-<div class="container" style="text-align: center;">
-<h2>クローゼットを作成しました。</h2>
-<img src = "{% static 'account-static/closet_complete.jpg' %}" width="70%" height="30%" margin = "40px">
-<h4>どんどんアイテムを登録しましょう</h4>
-
-<a href="{% url 'item_create' %}" id="space_top" button class="w-100 btn btn-md btn-primary" type="submit">アイテムを登録する</a>
+<div class="container">
+    <h2 class="text_center space_top">クローゼットを作成しました。</h2>
+    <img src = "{% static 'account-static/closet_complete.jpg' %}" width="70%" height="30%" margin = "40px">
+    <h4>どんどんアイテムを登録しましょう</h4>
+    <a href="{% url 'item_create' %}" class=" btn btn-md btn-primary" type="submit">アイテムを登録する</a>
 </div>
 {% endblock no_sidebar_content %}

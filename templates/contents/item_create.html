@@ -5,13 +5,13 @@
 <div class="container">
   {% if form.errors %}
   <div class="alert alert-danger">
-    エラーが発生しました。
+    <p>エラーが発生しました。</p>
     {% endif %}
     {% for field, error_list in form.errors.items %}
     <p>{{ error_list }}</p>{% endfor %}
   </div>
   <form action='' method='POST' enctype="multipart/form-data">
-    <h2 class="text_center space_top">アパレル登録機能</h2>{% csrf_token %}
+    <legend class="text_center space_top">アパレル登録機能</legend>{% csrf_token %}
     {% bootstrap_form form %}
     <input type = 'hidden' name = 'action' value = 'confirm'>
     <input type="hidden" id="id_item_image_base64" name="item_image_base64" />
@@ -21,7 +21,7 @@
   {{ field.item_name }}
   {% endfor %}
 
-  <a href="{% url 'home' %}" style="margin-top: 7px;" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+  <a href="{% url 'home' %}" class="btn btn-md btn-info space_top" type="submit">ホームに戻る</a></button>
 </div>
 
 <script>

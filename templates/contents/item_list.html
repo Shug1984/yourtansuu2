@@ -6,24 +6,14 @@
 
 {% block content %}
 <div class="container">
+  <h2 class="text_center space_bottom">登録アイテム一覧</h2>
   <div class="container" style="margin-bottom: 30px;">
     <h7>登録アイテム総数：{{ paginator.count }}件</h7><br>
     <h7>今日は{{ today | date:"Y年m月d日(D)" }}です</h7>
   </div>
-  
+   
   <div class="container">
-    <h5 style="margin-bottom: 20px;">あなたクローゼットはこちらです。</h5>
-    {% for item in object_list %}
-    <label style="margin-right: 0px;"><button id="main" class="btn btn-md btn-primary" onclick="location.href='{% url 'item_list' %}?closet={{ item.pk }}'">{{ item.closet_name }}</button></label>
-    <label>アイテム登録数：{{ item.item_count }}件/30件</label>
-    {% if item.item_count >= 25 %}
-    <label class="alert alert-warning">クローゼット登録上限（30件）が近づいています！{{ item.closet_name }}</label>
-    {% endif %}
-    {% endfor %}
-  </div>
-  
-  <div class="container">
-    <h5 style="margin-top: 20px;">検索できます</h5>
+    <h5 class="space_bottom">一覧を並べ替える</h5>
     <form method="GET">
     <div class="row">
       <div class= "col">

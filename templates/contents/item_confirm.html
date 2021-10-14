@@ -1,85 +1,52 @@
 {% extends 'contents/base.html' %}
-{% load django_bootstrap5 %}
+{% load django_bootstrap5 static humanize %}
 
-{% block header %}
-{% endblock header%}
 
-{% block content %}
-{{ block.super }}
+{% block no_sidebar_content %}
 <div class = "container">
-<h1 id="text_center">入力内容確認</h1>
-<table class="table">
-    <tr>
-        <th>アイテム種類：</th>
-        <td>{{ form.instance.get_item_type_display }}</td>
-    </tr>
-    <tr>
-        <th>季節：</th>
-        <td>{{ form.instance.get_season_display }}</td>
-    </tr>
-    <tr>
-        <th>シーン：</th>
-        <td>{{ form.instance.get_occasion_display }}</td>
-    </tr>
-    <tr>
-        <th>アイテム名称：</th>
-        <td>{{ form.item_name.value }}</td>
-    </tr>
-    <tr>
-        <th>アイテム色：</th>
-        <td>{{ form.instance.get_item_color_display }}</td>
-    </tr>
-    <tr>
-        <th>アイテムブランド：</th>
-        <td>{{ form.item_brand.value }}</td>
-    </tr>
-    <tr>
-        <th>購入日：</th>
-        <td>{{ form.purchase_date.value }}</td>
-    </tr>
-    <tr>
-        <th>購入価格：</th>
-        <td>{{ form.pricing.value }}円</td>
-    </tr>
-    <tr>
-        <th>アイテム画像：</th>
-        <td>
-            <img src="{{ item_image_base64 }}" style="max-width: 300px;" /> <br />
-            {{ form.item_image.value }}
-        </td>
-    </tr>
-    <tr>
-        <th>メモ：</th>
-        <td>{{ form.memo.value }}</td>
-    </tr>
-    <tr>
-        <th>お気に入り度：</th>
-        <td>{{ form.instance.get_favorite_level_display }}</td>
-    </tr>
-    <tr>
-        <th>大事さ：</th>
-        <td>{{ form.instance.get_item_importance_display }}</td>
-    </tr>
-</table>
-<form action = '.' method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    {{ field.as_hidden }}
-    {% endfor %}
-    <input type = 'hidden' name = 'action' value='complete'>
-    <input type="hidden" name="item_image_base64" value="{{ item_image_base64 }}" />
-<button class="btn btn-md btn-primary">登録する</button>
-</form>
-<form action = '.' method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    {{ field.as_hidden }}
-    {% endfor %}
-    <input type = 'hidden' name = 'action' value='input'>
-<button class="w-100 btn btn-md btn-primary" id="space_top">入力に戻る</button>
-</form>
+    <legend class="text_center space_top">入力内容を確認してください</legend>
+    <ul class="text_center">
+        <p class="font_confirm space_top">アイテム名称 <span class="remark"> (※必須)：</span><span class="underline">{{ form.item_name.value }}</span></p>
+        <p class="font_confirm space_top">アイテム種類 <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_item_type_display }}</span></p>
+        <p class="font_confirm space_top">季節 <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_season_display }}</span></p>
+        <p class="font_confirm space_top">シーン <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_occasion_display }}</span></p>
+        <p class="font_confirm space_top">購入金額 <span class="remark">(※必須)：</span><span class="underline">{{ form.pricing.value | intcomma }}円</span></p>
+        <p class="font_confirm space_top">購入日 <span class="remark">(※必須)：</span><span class="underline">{{ form.purchase_date.value }}</span></p>
+        <p class="font_confirm space_top">クローゼット：<span class="underline">{{ form.closet.value }}</span></p>
+        <p class="font_confirm space_top">アイテムカラー：<span class="underline">{{ form.instance.get_item_color_display }}</span></p>
+        <p class="font_confirm space_top">ブランド：<span class="underline">{{ form.item_brand.value }}</span></p>
+        <p class="font_confirm space_top">購入場所：<span class="underline">{{ form.purchase_place.value }}</span></p>
+        <p class="font_confirm space_top">お気に入り度：<span class="underline">{{ form.instance.get_favorite_level_display }}</span></p>
+        <p class="font_confirm space_top">大事さ：<span class="underline">{{ form.instance.get_item_importance_display }}</span></p>
+        <p class="font_confirm space_top">メモ：<span class="underline">{{ form.memo.value }}</span></p>
 
+        <div class="text_center">
+            <p class="text_center font_confirm space_top">アイテム画像：</p>
+            <img src="{{ item_image_base64 }}" style="max-width: 300px;" />
+            {{ form.item_image.value }}
+            {% if form.item_image.value == None %}
+            <img src="{% static 'account-static/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+            {% endif %}
+        </div>
+    </ul>
+    <form action = '.' method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        {{ field.as_hidden }}
+        {% endfor %}
+        <input type = 'hidden' name = 'action' value='complete'>
+        <input type="hidden" name="item_image_base64" value="{{ item_image_base64 }}" />
+        <button class="btn btn-md btn-primary space_bottom">登録する</button>
+    </form>
+    <form action = '.' method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        {{ field.as_hidden }}
+        {% endfor %}
+        <input type = 'hidden' name = 'action' value='input'>
+        <button class="btn btn-md btn-info">入力ページに戻る</button>
+    </form>
 </div>
 
 
-{% endblock content %}
+{% endblock no_sidebar_content %}

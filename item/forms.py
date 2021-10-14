@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.views.generic.edit import CreateView
 from django.conf import settings
 
-from .models import Item, Closet, FAVORITE_LEVEL_CHOICES, ITEM_IMPORTANCE_CHOICES
+from .models import Item, Closet, FAVORITE_LEVEL_CHOICES, ITEM_IMPORTANCE_CHOICES, SEASON_CHOICES, OCCASION_CHOICES
 
 
 MONTHS = {
@@ -25,7 +25,8 @@ class ItemForm(forms.ModelForm):
         'favorite_level':'お気に入り度','item_importance':'大事さ','memo':'メモ',}
 
         widgets = {
-            
+            'season': forms.RadioSelect(choices=SEASON_CHOICES),
+            'occasion': forms.RadioSelect(choices=OCCASION_CHOICES),
             'purchase_date': forms.SelectDateWidget(years = [x for x in range(2000,2040)], months = MONTHS),
             'favorite_level': forms.RadioSelect(choices = FAVORITE_LEVEL_CHOICES ),
             'item_importance': forms.RadioSelect(choices = ITEM_IMPORTANCE_CHOICES),

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load django_bootstrap5 humanize custom_pagination %}
+{% load django_bootstrap5 humanize custom_pagination static %}
 
 {% block navbar %}
 <header>
@@ -34,6 +34,43 @@
   </div>
 </header>
 {% endblock navbar%}
+
+<img src="{% static 'account-static/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center space_top space_bottom" style="max-height: 150px;">
+
+{% block sidebar %}
+<div class="container">
+  <div class="container">
+    <h5 class="space_top space_bottom">クローゼット一覧</h5>
+    {% for item in object_list %}
+    <label class="space_top"><button id="main" class="btn btn-md btn-primary" onclick="location.href='{% url 'item_list' %}?closet={{ item.pk }}'">{{ item.closet_name }}</button></label>
+    <label>アイテム登録数：{{ item.item_count }}件/30件</label>
+    {% if item.item_count >= 25 %}
+    <label class="alert alert-warning">クローゼット登録上限（30件）が近づいています！{{ item.closet_name }}</label>
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+  <div class="container">
+    <h5 style="margin-bottom: 12px; margin-top: 12px;">季節別一覧</h5>
+    <div class="row row-cols-2">
+      <div class="col" style="margin-bottom: 15px"><a class="btn btn-md btn-primary" href="#" role="button">春</a></div>
+      <div class="col" style="margin-bottom: 15px"><a class="btn btn-md btn-primary" href="#" role="button">夏</a></div>
+      <div class="col" style="margin-bottom: 15px"><a class="btn btn-md btn-primary" href="#" role="button">秋</a></div>
+      <div class="col" style="margin-bottom: 15px"><a class="btn btn-md btn-primary" href="#" role="button">冬</a></div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <h5 style="margin-bottom: 12px; margin-top: 12px;">シーン別一覧</h5>
+      <div class="col" style="margin-bottom: 10px"><a class="btn btn-md btn-primary" href="#" role="button">普段着</a></div>
+      <div class="col" style="margin-bottom: 10px"><a class="btn btn-md btn-primary" href="#" role="button">仕事着</a></div>
+      <div class="col" style="margin-bottom: 10px"><a class="btn btn-md btn-primary" href="#" role="button">よそ行き</a></div>
+      <div class="col" style="margin-bottom: 10px"><a class="btn btn-md btn-primary" href="#" role="button">スポーツ</a></div>
+      <div class="col" style="margin-bottom: 10px"><a class="btn btn-md btn-primary" href="#" role="button">その他</a></div>
+  </div>
+</div>
+
+{% endblock sidebar %}
 
         
 

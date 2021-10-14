@@ -1,18 +1,16 @@
 {% extends 'account/base.html' %}
 {% load django_bootstrap5 %}
 
-{% block header %}
-{% endblock header %}
 
-{% block content %}
+{% block no_sidebar_content %}
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal">ユーザー情報を変更する</h1>
+  <h2 class="text_center space_top">ユーザー情報を更新する</h2>
   <form class="form-signin" method='post' novalidate>
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button class="btn btn-md btn-primary" id="space_bottom" type="submit">更新する</button>
-    <a href="{% url 'home' %}" button class="w-100 btn btn-lg btn-primary" type="submit">ホームに戻る</a></button>
+    <button class="btn btn-md btn-primary space_bottom" type="submit">更新する</button><br>
+    <a href="{% url 'home' %}" class="btn btn-md btn-info" type="submit">ホームに戻る</a>
 </form>
 <p>{{ message }}</p>
 </div>
-{% endblock content %}
+{% endblock no_sidebar_content %}

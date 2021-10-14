@@ -3,17 +3,13 @@
 {% load static %}
 
 
-{% block content %}
-<div class="container style="margin:100 auto">
-<h3>質問があれば聞いてみましょう</h3><br>
-<h5>以下に質問の内容を記入して送信ボタンを押してください</h5><br>
-<form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button button_type="submit" content="問合せを送信" %}
-</form>
+{% block no_sidebar_content %}
+<div class="container">
+    <h2 class="text_center space_top">質問があれば聞いてみましょう</h2>
+    <h5 class="text_center space_top">以下に質問の内容を記入して送信ボタンを押してください</h5><br>
+    <form method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="問合せを送信" %}
+    </form>
 </div>
-
-
-
-{% endblock content %}
+{% endblock no_sidebar_content %}

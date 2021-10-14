@@ -1,11 +1,9 @@
 {% extends 'contents/base.html' %}
 {% load django_bootstrap5 %}
 
-{% block header %}{% endblock header %}
-
-{% block content %}
+{% block no_sidebar_content %}
 <div class="container">
-    <h1>以下のアイテムを削除しますか？</h1>
+    <h2 class="text_center space_top">以下のアイテムを削除しますか？</h2>
     <form action='' method="POST">{% csrf_token %}
         {% for item in object_item %}
         <ul>
@@ -23,11 +21,11 @@
             <li class="table-light">大事さ：{{ item.get_favorite_level_display }}</li>
             </ul>
         {% endfor %}
-    <button type = "submit" name = "button"  value = "confirm">削除します</button>
+        <button type = "submit" name = "button"  value = "confirm">削除します</button>
     </form>
-<a href="{% url 'home' %}" class="w-100 btn btn-lg btn-primary">ホームに戻る</a>
+<a href="{% url 'home' %}" class="btn btn-md btn-info">ホームに戻る</a>
 
 </div>
 
 
-{% endblock content %}
+{% endblock no_sidebar_content %}

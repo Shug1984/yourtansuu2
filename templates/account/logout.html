@@ -1,20 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'account/base_signup.html' %}
 {% load django_bootstrap5 %}
 
 
 
-{% block content %}
-<header>
-  <div class = "container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <p><a class="navbar-brand" href="{% url 'home' %}">YourTansuu2</a></p>
-        </div>
-        </nav>
-  </div>
-</header>
+{% block no_sidebar_content %}
 <div class="container">
-  <h1 class="h3 mb-3 fw-normal" style="text-align: center; vertical-align: middle">ログアウトしました</h1>
-  <a href="{% url 'top' %}" id="space_top" button class="w-100 btn btn-lg btn-primary" type="submit">トップに戻る</a></button>
+  <h2 class="text_center space_top">ログアウトしました</h2>
+  <div class="alert alert-success" style="text-align: center;">
+    <h4>またのお越しをお待ちしております</h4>
+    <a href="{% url 'top' %}" class="btn btn-md btn-info" type="submit">トップに戻る</a>
 </div>
-{% endblock content %}
+
+{% endblock no_sidebar_content %}

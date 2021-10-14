@@ -1,18 +1,15 @@
 {% extends 'contents/base.html' %}
 {% load django_bootstrap5 %}
 
-{% block header %}{% endblock header %}
-
-
-
-{% block content %}
+{% block no_sidebar_content %}
 <div class="container">
-    <div style="text-align: center;">
-        <h1>アイテム登録成功</h1>
-        <h5>リストに登録しました！</h5>
-        <a href="{% url 'item_list' %}" id="space_top" button class="w-33 btn btn-lg btn-primary" type="submit">一覧で確認する</a>
-        <a href="{% url 'item_create' %}" id="space_top" button class="w-33 btn btn-lg btn-primary" type="submit">続けて次のアイテムを登録する</a></button>
-        <a href="{% url 'home' %}" id="space_top" button class="w-33 btn btn-lg btn-primary" type="submit">ホームに戻る</a>
+        <h2 class="text_center space_top">アイテム登録成功</h1>
+        <h5 class="text_center space_top">リストに登録しました！</h5>
+        <div class="text_center space_top">
+            <a href="{% url 'item_list' %}" class="w-33 btn btn-md btn-primary" type="submit">一覧で確認する</a>
+            <a href="{% url 'item_create' %}" class="w-33 btn btn-md btn-primary" type="submit">続けて次のアイテムを登録する</a>
+            <a href="{% url 'home' %}" class="w-33 btn btn-md btn-info" type="submit">ホームに戻る</a>
+        </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock no_sidebar_content %}
