@@ -1,19 +1,15 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
-{% block header %}{% endblock header %}
 
-
-
-{% block content %}
-{{ block.super }}
+{% block no_sidebar_content %}
 <div class="container">
     <form action ='' method='POST'>
-        <h2 style="text-align: center;" id="space_top">アパレル登録情報の編集</h2>
+        <legend class="text_center space_top space_bottom">アパレル登録情報の編集</legend>
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button button_type="submit" content="更新する" %}
     </form>
 <a href="{% url 'item_detail' object_item.pk %}" id="space_top" button class="btn btn-md btn-primary" type="submit">前のページに戻る</a></button>
 </div>
-{% endblock content %}
+{% endblock no_sidebar_content %}

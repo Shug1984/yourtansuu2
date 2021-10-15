@@ -1,12 +1,9 @@
 {% extends 'contents/base.html' %}
 {% load django_bootstrap5 humanize custom_pagination %}
 
-{% block header %}{% endblock header %}
-
-
 {% block content %}
 <div class="container">
-  <h2 class="text_center space_bottom">登録アイテム一覧</h2>
+  <legend class="text_center space_bottom">登録アイテム一覧</legend>
   <div class="container" style="margin-bottom: 30px;">
     <h7>登録アイテム総数：{{ paginator.count }}件</h7><br>
     <h7>今日は{{ today | date:"Y年m月d日(D)" }}です</h7>
@@ -14,7 +11,7 @@
    
   <div class="container">
     <h5 class="space_bottom">一覧を並べ替える</h5>
-    <form method="GET">
+    <form method="GET">{% csrf_token %}
     <div class="row">
       <div class= "col">
         <div style="display:inline-flex">
@@ -34,22 +31,22 @@
   {% if page_object %}
   <div class="container">
     <div style="text-align: right;">
-      <span><a href="{% url 'item_list' %}"　button class="btn btn-md btn-primary">リストを元に戻す</a></span>
+      <span><a href="{% url 'item_list' %}" class="btn btn-md btn-primary">リストを元に戻す</a></span>
     </div>
     
-    <table class="table">
+    <table class="table table-lg">
       <thead>
         <tr>
           <th>No.</th>
-          <th>アイテム名称：</th>
-          <th>アイテム種類：</th>
-          <th>シーン：</th>
-          <th>アイテムカラー：</th>
-          <th>購入日：</th>
-          <th>購入価格：</th>
-          <th>経過時間：</th>
-          <th>詳細へ：</th>
-          <th>クローゼットを変更</th>
+          <th>アイテム名称</th>
+          <th>種類</th>
+          <th>シーン</th>
+          <th>カラー</th>
+          <th>購入日</th>
+          <th>購入価格</th>
+          <th>経過時間</th>
+          <th>詳細情報</th>
+          <th>クローゼット変更</th>
         </tr>
       </thead>
       <tbody>
@@ -62,8 +59,8 @@
           <td>{{ item.get_item_color_display}}</td>
           <td>{{ item.purchase_date| date:"Y年m月d日(D)" }}</td>
           <td>{{ item.pricing | intcomma }}円</td>
-          <td>{{ item.aging_date.days | intcomma }}日経過しています</td>
-          <td><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細を見る</a></td>
+          <td>{{ item.aging_date.days | intcomma }}日経過</td>
+          <td><a href="{% url 'item_detail' item.pk %}"button class="btn btn-sm btn-primary" type="submit">詳細へ</a></td>
           {#<td>{{ item.closet }}</td>#}
           <td>
             <select class="closet_location" item_id = "{{ item.pk }}">
@@ -81,25 +78,27 @@
     </table>
   </div>
 
-<div class="pagination">
-    <span class="step-links">
-        {% if page_object.has_previous %}
-            <a href="?{% url_replace request 'page' 1 %}">&laquo; 1ページ目に戻る</a>
-            <a href="?{% url_replace request 'page' page_object.previous_page_number %}">前のページ</a>
-        {% endif %}
+  <div class="pagination">
+      <span class="step-links">
+          {% if page_object.has_previous %}
+              <a href="?{% url_replace request 'page' 1 %}">&laquo; 1ページ目に戻る</a>
+              <a href="?{% url_replace request 'page' page_object.previous_page_number %}">前のページ</a>
+          {% endif %}
 
-        <span class="current">
-            ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}.
-        </span>
+          <span class="current">
+              ページ {{ page_object.number }} / {{ page_object.paginator.num_pages }}.
+          </span>
 
-        {% if page_object.has_next %}
-            <a href="?{% url_replace request 'page' page_object.next_page_number %}">次のページ</a>
-            <a href="?{% url_replace request 'page' page_object.paginator.num_pages %}">最後のページ &raquo;</a>
-        {% endif %}
-    </span>
+          {% if page_object.has_next %}
+              <a href="?{% url_replace request 'page' page_object.next_page_number %}">次のページ</a>
+              <a href="?{% url_replace request 'page' page_object.paginator.num_pages %}">最後のページ &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
 </div>
+{% endblock content %}
 
-{% csrf_token %}
+
 
 <script>
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -132,14 +131,4 @@
       'click', function() {
             this.style.backgroundColor="red";
         });
-    
-
 </script>
-
-</div>
-{% endblock content %}
-
-{% for item in page_object %}
-    {{ item.item_name|upper}}<br>
-    {{ item.item_type|upper}}<br>
-{% endfor %}

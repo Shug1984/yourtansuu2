@@ -1,11 +1,11 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
 {% block no_sidebar_content %}
 <div class="container">
     <form action='' method="POST">
         {% csrf_token %}
-        <h2 class="text_center space_top">削除しました。</h2>
+        <legend class="text_center space_top">指定したアイテムを削除しました。</legend>
     </form>
     <a href="{% url 'item_list' %}" class="btn btn-md btn-primary space_bottom" type="submit">アイテム一覧に戻る</a><br>
     <a href="{% url 'home' %}" class="btn btn-md btn-info" type="submit">ホームに戻る</a>

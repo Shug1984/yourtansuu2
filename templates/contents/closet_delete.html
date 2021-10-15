@@ -1,9 +1,9 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
 {% block no_sidebar_content %}
 <div class="container">
-    <h2 class="text_center space_top">クローゼットを削除しますか？</h2>
+    <legend class="text_center space_top">クローゼットを削除しますか？</legend>
     <div style="text-align: center;">
         <form action='' method="POST">{% csrf_token %}
             {% if object_item.item_count > 0 %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 humanize custom_pagination static %}
+
+{% block navbar %}
+<header>
+  <div class = "container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <p><a class="navbar-brand" href="{% url 'home' %}">YourTansuu2</a></p>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                  <p><a class="nav-link" href="{% url 'user_information' request.user.pk %}">アカウント情報</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'inquiry_form' %}">お問合わせ</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'home' %}">ホームに戻る</a></p>
+              </li>
+              <li class="nav-item">
+                <p><a class="nav-link" href="{% url 'top' %}">トップに戻る</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+  </div>
+</header>
+{% endblock navbar%}
+
+<img src="{% static 'account-static/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center space_top space_bottom" style="max-height: 150px;">
+
+
+
+        
+
+

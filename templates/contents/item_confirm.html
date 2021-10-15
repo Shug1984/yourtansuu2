@@ -1,34 +1,37 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 static humanize %}
 
 
 {% block no_sidebar_content %}
 <div class = "container">
     <legend class="text_center space_top">入力内容を確認してください</legend>
-    <ul class="text_center">
-        <p class="font_confirm space_top">アイテム名称 <span class="remark"> (※必須)：</span><span class="underline">{{ form.item_name.value }}</span></p>
-        <p class="font_confirm space_top">アイテム種類 <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_item_type_display }}</span></p>
-        <p class="font_confirm space_top">季節 <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_season_display }}</span></p>
-        <p class="font_confirm space_top">シーン <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_occasion_display }}</span></p>
-        <p class="font_confirm space_top">購入金額 <span class="remark">(※必須)：</span><span class="underline">{{ form.pricing.value | intcomma }}円</span></p>
-        <p class="font_confirm space_top">購入日 <span class="remark">(※必須)：</span><span class="underline">{{ form.purchase_date.value }}</span></p>
-        <p class="font_confirm space_top">クローゼット：<span class="underline">{{ form.closet.value }}</span></p>
-        <p class="font_confirm space_top">アイテムカラー：<span class="underline">{{ form.instance.get_item_color_display }}</span></p>
-        <p class="font_confirm space_top">ブランド：<span class="underline">{{ form.item_brand.value }}</span></p>
-        <p class="font_confirm space_top">購入場所：<span class="underline">{{ form.purchase_place.value }}</span></p>
-        <p class="font_confirm space_top">お気に入り度：<span class="underline">{{ form.instance.get_favorite_level_display }}</span></p>
-        <p class="font_confirm space_top">大事さ：<span class="underline">{{ form.instance.get_item_importance_display }}</span></p>
-        <p class="font_confirm space_top">メモ：<span class="underline">{{ form.memo.value }}</span></p>
-
-        <div class="text_center">
-            <p class="text_center font_confirm space_top">アイテム画像：</p>
-            <img src="{{ item_image_base64 }}" style="max-width: 300px;" />
-            {{ form.item_image.value }}
-            {% if form.item_image.value == None %}
-            <img src="{% static 'account-static/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
-            {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="font_confirm space_top">アイテム名称 <span class="remark"> (※必須)：</span><span class="underline">{{ form.item_name.value }}</span></p>
+                <p class="font_confirm space_top">アイテム種類 <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_item_type_display }}</span></p>
+                <p class="font_confirm space_top">季節 <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_season_display }}</span></p>
+                <p class="font_confirm space_top">シーン <span class="remark">(※必須)：</span><span class="underline">{{ form.instance.get_occasion_display }}</span></p>
+                <p class="font_confirm space_top">購入金額 <span class="remark">(※必須)：</span><span class="underline">{{ form.pricing.value | intcomma }}円</span></p>
+                <p class="font_confirm space_top">購入日 <span class="remark">(※必須)：</span><span class="underline">{{ form.purchase_date.value }}</span></p>
+                <p class="font_confirm space_top">クローゼット：<span class="underline">{{ form.closet.value }}</span></p>
+                <p class="font_confirm space_top">アイテムカラー：<span class="underline">{{ form.instance.get_item_color_display }}</span></p>
+                <p class="font_confirm space_top">ブランド：<span class="underline">{{ form.item_brand.value }}</span></p>
+                <p class="font_confirm space_top">購入場所：<span class="underline">{{ form.purchase_place.value }}</span></p>
+                <p class="font_confirm space_top">お気に入り度：<span class="underline">{{ form.instance.get_favorite_level_display }}</span></p>
+                <p class="font_confirm space_top">大事さ：<span class="underline">{{ form.instance.get_item_importance_display }}</span></p>
+                <p class="font_confirm space_top">メモ：<span class="underline">{{ form.memo.value }}</span></p>
+            </div>
+            <div class="col">
+                <p class="font_confirm space_top">アイテム画像</p>
+                <img src="{{ item_image_base64 }}" style="max-width: 300px;" />
+                {{ form.item_image.value }}
+                {% if form.item_image.value == None %}
+                <img src="{% static 'account-static/Blank_image.jpeg' %}" class="figure-img img-fluid rounded text_center" style="max-width: 300px;">
+                {% endif %}
+            </div>
         </div>
-    </ul>
+    </div>
     <form action = '.' method="post">
         {% csrf_token %}
         {% for field in form %}

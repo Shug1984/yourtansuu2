@@ -42,7 +42,7 @@
   <div class="container">
     <h5 class="space_top space_bottom">クローゼット一覧</h5>
     {% for item in object_list %}
-    <label class="space_top"><button id="main" class="btn btn-md btn-primary" onclick="location.href='{% url 'item_list' %}?closet={{ item.pk }}'">{{ item.closet_name }}</button></label>
+    <label class="space_top"><button class="btn btn-md btn-primary" onclick="location.href='{% url 'item_list' %}?closet={{ item.pk }}'">{{ item.closet_name }}</button></label>
     <label>アイテム登録数：{{ item.item_count }}件/30件</label>
     {% if item.item_count >= 25 %}
     <label class="alert alert-warning">クローゼット登録上限（30件）が近づいています！{{ item.closet_name }}</label>

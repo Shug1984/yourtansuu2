@@ -1,9 +1,9 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
 {% block no_sidebar_content %}
 <div class="container">
-        <h2 class="text_center space_top">アイテム登録成功</h1>
+        <legend class="text_center space_top">アイテム登録成功</legend>
         <h5 class="text_center space_top">リストに登録しました！</h5>
         <div class="text_center space_top">
             <a href="{% url 'item_list' %}" class="w-33 btn btn-md btn-primary" type="submit">一覧で確認する</a>

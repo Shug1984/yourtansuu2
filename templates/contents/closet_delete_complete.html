@@ -1,13 +1,13 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
 {% block header %}{% endblock header %}
 
 {% block content %}
 <div class="container">
-    <p>削除しました</p>
+    <legend>削除しました</legend>
    
-<a href="{% url 'home' %}" class="w-100 btn btn-lg btn-primary">ホームに戻る</a>
+<a href="{% url 'home' %}" class="w-100 btn btn-md btn-primary">ホームに戻る</a>
 </div>
 
 

@@ -1,14 +1,11 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
-
-{% block header %}{% endblock header %}
-
 
 {% block no_sidebar_content %}
 <div class="container">
 {{ form.errors }}
 <form action='' method='POST' enctype="multipart/form-data">
-    <h2 class="text_center space_top">クローゼット作成機能</h2>
+    <legend class="text_center space_top">クローゼット作成機能</legend>
     <div class="alert alert-success" style="text-align: center;">
         <p>クローゼットはアイテムを登録する"フォルダー"のことです</p>
         <p>クローゼット1つあたり、最大30件のアイテムを登録することが出来ます</p>

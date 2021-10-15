@@ -1,13 +1,13 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 static %}
 
 {% block no_sidebar_content %}
 <div class="container">
-   <h2 class="text_center space_top">クローゼット名の編集が完了しました。</h2>
+   <legend class="text_center space_top">クローゼット名の編集が完了しました。</legend>
    <div class="container" style="text-align: center;">
       <img src = "{% static 'account-static/closet_complete.jpg' %}" width="70%" height="30%" margin = "40px">
    </div>
-<a href="{% url 'closet_list' %}" class="btn btn-md btn-primary space_bottom" type="submit">前のページに戻る</a>
+<a href="{% url 'closet_list' %}" class="btn btn-md btn-primary space_bottom" type="submit">クローゼットリストに戻る</a><br>
 <a href="{% url 'home' %}" class="btn btn-md btn-info" type="submit">ホームに戻る</a>
 </div>
 {% endblock no_sidebar_content %}

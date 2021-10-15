@@ -1,4 +1,4 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
 
@@ -6,7 +6,7 @@
 <div class="container">
     <form action='' method="POST">
         {% csrf_token %}
-        <h2 class="text_center space_top">削除確認画面</h2>
+        <legend class="text_center space_top">削除確認画面</legend>
         <h5 class="text_center space_top">本当に削除しますか???</h5>
         <form action='' method="POST">{% csrf_token %}
           {% for item in object_item %}

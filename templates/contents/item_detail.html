@@ -1,28 +1,22 @@
 {% extends 'contents/base.html' %}
 {% load django_bootstrap5 static humanize %}
 
-{% block header %}{% endblock header %}
-
-
-
 {% block content %}
 <div class="container">
-    <div style="text-align: center;">
-        <h5 style="margin-top: 10px; margin-bottom: 30px;">アパレル情報詳細</h5>
-        <div class="item-info" style="margin-bottom: 30px;">
-            <h4>{{ object_item.item_name }}</h4>
-        </div>
+    <legend class="text_center space_top space_bottom">アパレル情報詳細</legend>
+    <div class="item-info" style="margin-top: 100px; color: rgb(33, 25, 136);">
+        <h4 class="space_top space_bottom">{{ object_item.item_name }}</h4>
     </div>
-    <table class="table table-sm">
+    <table class="table table-lg">
         <thead>
             <tr>
-                <th>アイテム種類：</th>
-                <th>季節：</th>
-                <th>シーン：</th>
-                <th>アイテムカラー:</th>
-                <th>ブランド：</th>
-                <th>購入日：</th>
-                <th>購入価格：</th>
+                <th>アイテム種類</th>
+                <th>季節</th>
+                <th>シーン</th>
+                <th>アイテムカラー</th>
+                <th>ブランド</th>
+                <th>購入日</th>
+                <th>購入価格</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +31,7 @@
             </tr>
         </tbody>
     </table>
+
     <div class="container">
         <div class="row">
             <div class="col">
@@ -57,16 +52,11 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <p>メモ：{{ object_item.memo }}</p>
-    </div>
+    <p>メモ：{{ object_item.memo }}</p>
     
-    <div style="text-align: center;">
-        <a href="{% url 'item_list' %}"button class="btn btn-md btn-primary" type="submit">リストに戻る</a></button>
-        <a href="{% url 'item_delete' object_item.pk %}"button class="btn btn-md btn-primary" type="submit">削除する</a></button>
-        <a href="{% url 'item_update' object_item.pk %}"button class="btn btn-md btn-primary" type="submit">編集する</a></button>
-    </div>
-</div>
+        <a href="{% url 'item_list' %}" class="btn btn-md btn-primary" type="submit">リストに戻る</a>
+        <a href="{% url 'item_delete' object_item.pk %}" class="btn btn-md btn-primary" type="submit">削除する</a>
+        <a href="{% url 'item_update' object_item.pk %}" class="btn btn-md btn-primary" type="submit">編集する</a>
 {% endblock content %}
 
 <li class="table-light">アイテム画像：<img src ='{{ object_item.item_image.url }}' width=100></li>

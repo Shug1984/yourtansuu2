@@ -1,17 +1,8 @@
 {% extends 'contents/base.html' %}
-{% load django_bootstrap5 %}
-{% load static %}
+{% load django_bootstrap5 static %}
 
-<head>
-    <style>
-      .col-lg-3 {
-        text-align: center;
-      }
 
-    </style>
-</head>
-
-{% block no_sidebar_content %}
+{% block content %}
 <div class="container" style="margin: 30px auto;">
     <div class="row">
         
@@ -62,4 +53,4 @@
 
     </div>
 </div>
-{% endblock no_sidebar_content %}
+{% endblock content %}

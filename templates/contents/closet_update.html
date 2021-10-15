@@ -1,8 +1,9 @@
-{% extends 'contents/base.html' %}
+{% extends 'contents/base_nosidebar.html' %}
 {% load django_bootstrap5 %}
 
 {% block no_sidebar_content %}
 <div class="container">
+    <legend class="text_center space_top space_bottom">クローゼットの登録内容を変更する</legend>
     <form action ='' method='POST'>{% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button button_type="submit" content="更新する" %}
